@@ -43,21 +43,29 @@ public class Main {
         modEventBus.register(DispenserRegister.class);
 
         // Register data generation listener
-        modEventBus.addListener(Main::onGatherData);
+        modEventBus.addListener(Main::onGatherDataClient);
+        modEventBus.addListener(Main::onGatherDataServer);
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, MagicCloverConfig.SPEC);
     }
 
-    public static void onGatherData(GatherDataEvent event) {
+    public static void onGatherDataClient(GatherDataEvent.Client event) {
         var gen = event.getGenerator();
         var packOutput = gen.getPackOutput();
-        var helper = event.getExistingFileHelper();
         var lookupProvider = event.getLookupProvider();
 
-        gen.addProvider(event.includeClient(), new MagicCloverBlockModelProvider(packOutput, helper));
-        gen.addProvider(event.includeClient(), new MagicCloverItemModelProvider(packOutput, helper));
-        gen.addProvider(event.includeServer(), new MagicCloverRecipeProvider(packOutput, lookupProvider));
-        gen.addProvider(event.includeServer(), new MagicCloverLootProvider(packOutput, lookupProvider));
+        // 注意：新版 model provider 的构造参数大概率变了，下面以 NeoForge 自带的为例
+        gen.addProvider(true, new MagicCloverBlockModelProvider(packOutput, lookupProvider));
+        gen.addProvider(true, new MagicCloverItemModelProvider(packOutput, lookupProvider));
+    }
+
+    public static void onGatherDataServer(GatherDataEvent.Server event) {
+        var gen = event.getGenerator();
+        var packOutput = gen.getPackOutput();
+        var lookupProvider = event.getLookupProvider();
+
+        gen.addProvider(true, new MagicCloverRecipeProvider(packOutput, lookupProvider));
+        gen.addProvider(true, new MagicCloverLootProvider(packOutput, lookupProvider));
     }
 }

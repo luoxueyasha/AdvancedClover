@@ -6,7 +6,7 @@ import com.roseyasa.advanced_clover.registry.ItemRegister;
 import com.roseyasa.advanced_clover.registry.RecipeRegister;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
@@ -16,12 +16,12 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 public class MagicCloverRecipe extends CustomRecipe {
-    public MagicCloverRecipe(CraftingBookCategory category) {
-        super(category);
+    public MagicCloverRecipe() {
+        super();
     }
 
     @Override
-    public boolean matches(CraftingInput input, @NotNull Level level) {
+    public boolean matches(CraftingInput input, Level level) {
         boolean hasClover = false;
         boolean hasOtherItem = false;
 
@@ -42,7 +42,7 @@ public class MagicCloverRecipe extends CustomRecipe {
     }
 
     @Override
-    public ItemStack assemble(CraftingInput input, HolderLookup.Provider registries) {
+    public ItemStack assemble(CraftingInput input) {
         ItemStack otherItem = ItemStack.EMPTY;
         
         for (int i = 0; i < input.size(); i++) {
@@ -54,7 +54,7 @@ public class MagicCloverRecipe extends CustomRecipe {
         }
 
         ItemStack result = new ItemStack(ItemRegister.ITEM_MAGIC_CLOVER.get());
-        ResourceLocation id = otherItem.getItem().builtInRegistryHolder().key().location();
+        Identifier id = otherItem.getItem().builtInRegistryHolder().key().identifier();
         result.set(ComponentRegister.INGREDIENT_NAMESPACE, new IngredientNamespceContent(id.getNamespace()));
 
         return result;
@@ -66,7 +66,7 @@ public class MagicCloverRecipe extends CustomRecipe {
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<? extends CustomRecipe> getSerializer() {
         return RecipeRegister.MAGIC_CLOVER_RECIPE.get();
     }
 

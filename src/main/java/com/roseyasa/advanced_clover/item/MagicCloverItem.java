@@ -7,11 +7,9 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -58,7 +56,7 @@ public class MagicCloverItem extends Item {
     }
 
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level pLevel, @NotNull Player pPlayer, @NotNull InteractionHand pUsedHand) {
+    public @NotNull InteractionResult use(@NotNull Level pLevel, @NotNull Player pPlayer, @NotNull InteractionHand pUsedHand) {
         ItemStack itemStack = pPlayer.getItemInHand(pUsedHand);
         
         // @debug，添加调试信息，显示存储的命名空间
@@ -80,11 +78,11 @@ public class MagicCloverItem extends Item {
         // @debug, 用来调试isbf的1.21
         itemStack.set(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
 
-        return InteractionResultHolder.pass(itemStack);
+        return InteractionResult.PASS;
     }
 
     public static boolean CloverRandomMethod(ItemStack itemStack, Level level, @Nullable Player player){
-        if (player == null || level.isClientSide || itemStack == null) return false;
+        if (player == null || level.isClientSide() || itemStack == null) return false;
 
         MagicCloverEvent event = new MagicCloverEvent(player, level, itemStack);
         NeoForge.EVENT_BUS.post(event);

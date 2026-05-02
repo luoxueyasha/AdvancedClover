@@ -14,8 +14,6 @@ import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import static net.minecraft.world.level.block.Blocks.register;
-
 public class BlockRegister {
 
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Main.MODID);
@@ -30,14 +28,14 @@ public class BlockRegister {
         BLOCK_THREE_LEAF_CLOVER = BLOCKS.register("three_leaf_clover", ()->new CloverBlock(
                 MobEffects.UNLUCK, 9.0F, BlockBehaviour.Properties.of()
                 .mapColor(MapColor.PLANT)
-                .noCollission()
+                .noCollision()
                 .instabreak()
                 .sound(SoundType.GRASS)
                 .pushReaction(PushReaction.DESTROY)));
         BLOCK_FOUR_LEAF_CLOVER = BLOCKS.register("four_leaf_clover", ()->new CloverBlock(
                 MobEffects.LUCK, 12.0F, BlockBehaviour.Properties.of()
                 .mapColor(MapColor.PLANT)
-                .noCollission()
+                .noCollision()
                 .instabreak()
                 .sound(SoundType.GRASS)
                 .pushReaction(PushReaction.DESTROY)));

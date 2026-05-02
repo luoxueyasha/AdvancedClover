@@ -16,26 +16,26 @@ public class MagicCloverRecipeProvider extends RecipeProvider {
     }
 
     @Override
-    protected void buildRecipes(@NotNull RecipeOutput recipeOutput) {
+    protected void buildRecipes() {
         // 四叶草
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegister.ITEM_FOUR_LEAF_CLOVER.get(), 3)
                 .requires(ItemRegister.ITEM_THREE_LEAF_CLOVER.get(), 4)
                 .unlockedBy("has_three_leaf_clover", has(ItemRegister.ITEM_THREE_LEAF_CLOVER.get()))
                 .unlockedBy("has_four_leaf_clover", has(ItemRegister.ITEM_FOUR_LEAF_CLOVER.get()))
-                .save(recipeOutput);
+            .save(this.output);
 
         // 三叶草
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegister.ITEM_THREE_LEAF_CLOVER.get(), 4)
                 .requires(ItemRegister.ITEM_FOUR_LEAF_CLOVER.get(), 3)
                 .unlockedBy("has_three_leaf_clover", has(ItemRegister.ITEM_THREE_LEAF_CLOVER.get()))
                 .unlockedBy("has_four_leaf_clover", has(ItemRegister.ITEM_FOUR_LEAF_CLOVER.get()))
-                .save(recipeOutput);
+            .save(this.output);
 
         buildMagicCloverRecipies(recipeOutput);
     }
 
-    private void buildMagicCloverRecipies(@NotNull RecipeOutput recipeOutput) {
+    private void buildMagicCloverRecipies() {
         SpecialRecipeBuilder.special(MagicCloverRecipe::new)
-            .save(recipeOutput, Main.MODID + ":crafting_special_magic_clover");
+            .save(this.output, Main.MODID + ":crafting_special_magic_clover");
     }
 }

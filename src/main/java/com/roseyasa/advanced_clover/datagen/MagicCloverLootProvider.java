@@ -17,7 +17,8 @@ public class MagicCloverLootProvider extends LootTableProvider {
     }
 
     @Override
-    protected void validate(WritableRegistry<LootTable> registry, ValidationContext context, ProblemReporter.Collector collector) {
+    protected void validate(WritableRegistry<LootTable> tables, ValidationContextSource validationContext, ProblemReporter.Collector problems) {
+        // @debug，这是干什么的？
         // FIXME Need proper migration
         // map.forEach((key, value) -> LootTables.validate(context, key, value));
     }
