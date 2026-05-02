@@ -1,0 +1,13 @@
+{
+  "itemGroup.advanced_clover": "Example Mod Tab",
+  "block.advanced_clover.example_block": "Example Block",
+  "item.advanced_clover.example_item": "Example Item",
+
+  "advanced_clover.configuration.title": "Advanced Clover Configs",
+  "advanced_clover.configuration.section.advanced_clover.common.toml": "Advanced Clover Configs",
+  "advanced_clover.configuration.section.advanced_clover.common.toml.title": "Advanced Clover Configs",
+  "advanced_clover.configuration.items": "Item List",
+  "advanced_clover.configuration.logDirtBlock": "Log Dirt Block",
+  "advanced_clover.configuration.magicNumberIntroduction": "Magic Number Text",
+  "advanced_clover.configuration.magicNumber": "Magic Number"
+}
