@@ -1,0 +1,17 @@
+{
+  "itemGroup.advanced_clover.name": "進階酢漿",
+
+  "#comment.for_translators_0": "致翻译者们：",
+  "#comment.for_translators_1": "`三叶草`泛指植物学车轴草族（tribe Trifolieae）下的所有物种，包括但不限于苜蓿属（Medicago）以及三叶草属（Trifolium）等。",
+  "#comment.for_translators_2": "如果你的语言里对于这些具体的物种有区分的话，就找一个最能概括描述这些植物的称呼。",
+  "#comment.for_translators_3": "参：https://en.wikipedia.org/wiki/Trifolieae",
+  "#comment.for_translators_4": "这些带#comment的文字不会出现在游戏里，所以可以不翻译。",
+  "#comment.for_translators_5": "我不太会文言，这段摸了",
+
+  "block.advanced_clover.three_leaf_clover": "酢漿",
+  "block.advanced_clover.four_leaf_clover": "四葉酢漿",
+  "item.advanced_clover.magic_clover": "神力四葉酢漿",
+  "tooltip.advanced_clover.random_source.vanilla": "擲「礦藝」物一",
+  "tooltip.advanced_clover.random_source.mod": "擲「%s」物一",
+  "tooltip.advanced_clover.random_source.none": "無隨機之根"
+}

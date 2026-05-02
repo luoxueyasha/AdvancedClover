@@ -1,0 +1,16 @@
+{
+  "itemGroup.advanced_clover.name": "進階四葉草",
+
+  "#comment.for_translators_0": "致翻譯者們：",
+  "#comment.for_translators_1": "`三葉草`泛指植物學車軸草族（tribe Trifolieae）下的所有物種，包括但不限於苜蓿屬（Medicago）以及三葉草屬（Trifolium）等。",
+  "#comment.for_translators_2": "如果你的語言裡對於這些具體的物種有區分的話，就找一個最能概括描述這些植物的稱呼。",
+  "#comment.for_translators_3": "參：https://en.wikipedia.org/wiki/Trifolieae",
+  "#comment.for_translators_4": "這些帶#comment的文字不會出現在遊戲裡，所以可以不翻譯。",
+
+  "block.advanced_clover.three_leaf_clover": "三葉草",
+  "block.advanced_clover.four_leaf_clover": "四葉草",
+  "item.advanced_clover.magic_clover": "魔法四葉草",
+  "tooltip.advanced_clover.random_source.vanilla": "隨機擲出一件Minecraft原版物品",
+  "tooltip.advanced_clover.random_source.mod": "隨機擲出一件「%s」物品",
+  "tooltip.advanced_clover.random_source.none": "無隨機源"
+}

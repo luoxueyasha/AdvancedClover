@@ -10,4 +10,22 @@
   "advanced_clover.configuration.logDirtBlock": "Log Dirt Block",
   "advanced_clover.configuration.magicNumberIntroduction": "Magic Number Text",
   "advanced_clover.configuration.magicNumber": "Magic Number"
+  
+  
+    "itemGroup.advanced_clover.name": "Advanced Clover",
+
+  "#comment.for_translators_0": "Dear translators:",
+  "#comment.for_translators_1": "`Clover` references to the tribe Trifolieae, which contains three-leaf plants like Medicago, Trifolium, etc.",
+  "#comment.for_translators_2": "If these specific plants differ in your language, just choose the most common name for these.",
+  "#comment.for_translators_3": "Reference: https://en.wikipedia.org/wiki/Trifolieae",
+  "#comment.for_translators_4": "These lines started with `#comment` does not appear in-game, so you could skip these lines.",
+
+  "block.advanced_clover.three_leaf_clover": "Clover",
+  "block.advanced_clover.four_leaf_clover": "Four-leaf Clover",
+  "item.advanced_clover.magic_clover": "Magic Clover",
+  "tooltip.advanced_clover.random_source.vanilla": "Randomly throws one Vanilla Minecraft item",
+  "tooltip.advanced_clover.random_source.mod": "Randomly throws one \"%s\" item",
+  "tooltip.advanced_clover.random_source.none": "No random source",
+
+  "config.advanced_clover.item_settings": "Item Settings"
 }
