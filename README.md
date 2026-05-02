@@ -1,4 +1,13 @@
 
+Advanced Clover
+======
+
+Refine from the old [Magic Clover](https://www.minecraftforum.net/forums/mapping-and-modding-java-edition/minecraft-mods/1291695-magic-clover-four-leaf-clover-in-minecraft) mod by konwboj. Enjoy good ol' days with good ol' mods!
+
+Participant in [TeaCon2026](https://www.teacon.cn/2026).
+
+
+<!--
 Installation information
 =======
 
@@ -23,3 +32,4 @@ Additional Resources:
 ==========
 Community Documentation: https://docs.neoforged.net/  
 NeoForged Discord: https://discord.neoforged.net/
+-->
