@@ -31,11 +31,10 @@ public class ItemRegister {
         // Items
         ITEM_MAGIC_CLOVER = ITEMS.register(ITEM_MAGIC_CLOVER_ID, ()-> new MagicCloverItem(new Item.Properties().setId(createItemKey(ITEM_MAGIC_CLOVER_ID))));
 
-        // BlockItems with no BlockEntity
-        ITEM_THREE_LEAF_CLOVER = ITEMS.register(ITEM_THREE_LEAF_CLOVER_ID,
-                ()-> new BlockItem(BLOCK_THREE_LEAF_CLOVER.get(),new Item.Properties().setId(createItemKey(ITEM_THREE_LEAF_CLOVER_ID))));
-        ITEM_FOUR_LEAF_CLOVER = ITEMS.register(ITEM_FOUR_LEAF_CLOVER_ID,
-                ()-> new BlockItem(BLOCK_FOUR_LEAF_CLOVER.get(),new Item.Properties().setId(createItemKey(ITEM_FOUR_LEAF_CLOVER_ID))));
+        ITEM_THREE_LEAF_CLOVER =
+            ItemRegister.ITEMS.registerSimpleBlockItem(ITEM_THREE_LEAF_CLOVER_ID, BLOCK_THREE_LEAF_CLOVER);
+        ITEM_FOUR_LEAF_CLOVER =
+            ItemRegister.ITEMS.registerSimpleBlockItem(ITEM_FOUR_LEAF_CLOVER_ID, BLOCK_FOUR_LEAF_CLOVER);
     }
 
 }

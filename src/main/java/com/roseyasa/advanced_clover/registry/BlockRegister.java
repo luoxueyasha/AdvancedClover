@@ -25,9 +25,9 @@ public class BlockRegister {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Main.MODID);
 
     public static final DeferredHolder<Block, Block> BLOCK_THREE_LEAF_CLOVER;
-    private static final String BLOCK_THREE_LEAF_CLOVER_ID =  "three_leaf_clover";
+    static final String BLOCK_THREE_LEAF_CLOVER_ID =  "three_leaf_clover";
     public static final DeferredHolder<Block, Block> BLOCK_FOUR_LEAF_CLOVER;
-    private static final String BLOCK_FOUR_LEAF_CLOVER_ID =  "four_leaf_clover";
+    static final String BLOCK_FOUR_LEAF_CLOVER_ID =  "four_leaf_clover";
 
     static{
         BLOCK_THREE_LEAF_CLOVER = BLOCKS.register(BLOCK_THREE_LEAF_CLOVER_ID, ()->new CloverBlock(
@@ -38,7 +38,7 @@ public class BlockRegister {
                 .instabreak()
                 .sound(SoundType.GRASS)
                 .pushReaction(PushReaction.DESTROY)));
-        BLOCK_FOUR_LEAF_CLOVER = BLOCKS.register("four_leaf_clover", ()->new CloverBlock(
+        BLOCK_FOUR_LEAF_CLOVER = BLOCKS.register(BLOCK_FOUR_LEAF_CLOVER_ID, ()->new CloverBlock(
                 MobEffects.LUCK, 12.0F, BlockBehaviour.Properties.of()
                 .setId(createBlockKey(BLOCK_FOUR_LEAF_CLOVER_ID))
                 .mapColor(MapColor.PLANT)
@@ -46,6 +46,8 @@ public class BlockRegister {
                 .instabreak()
                 .sound(SoundType.GRASS)
                 .pushReaction(PushReaction.DESTROY)));
+
+
     }
 
 }

@@ -95,14 +95,6 @@ public class MagicCloverItem extends Item {
         return true;
     }
 
-//    @Override
-//    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-//        IngredientNamespceContent ingredientNamespceContent = stack.get(ComponentRegister.INGREDIENT_NAMESPACE);
-//        DataComponentGetter var4 = null; // @debug
-//        if(ingredientNamespceContent != null) {
-//            ingredientNamespceContent.addToTooltip(context, tooltipComponents::add, tooltipFlag,var4);
-//        }
-//    }
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
         IngredientNamespceContent ingredientNamespceContent = stack.get(ComponentRegister.INGREDIENT_NAMESPACE);
