@@ -19,6 +19,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 import com.roseyasa.advanced_clover.registry.ItemRegister;
 import net.minecraft.world.level.block.Block;
@@ -31,6 +32,7 @@ import org.spongepowered.asm.util.IConsumer;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class MagicCloverItem extends Item {
 
@@ -61,20 +63,19 @@ public class MagicCloverItem extends Item {
         ItemStack itemStack = pPlayer.getItemInHand(pUsedHand);
         
         // @debug，添加调试信息，显示存储的命名空间
-        IngredientNamespceContent ingredient_namespace = itemStack.get(ComponentRegister.INGREDIENT_NAMESPACE);
+//        IngredientNamespceContent ingredient_namespace = itemStack.get(ComponentRegister.INGREDIENT_NAMESPACE);
 
-//        pPlayer.getCooldowns().addCooldown(this, this.cooldown);
-//        if (CloverRandomMethod(itemStack, pLevel, pPlayer)) {
-//            pPlayer.swing(pUsedHand, true);
-//            if (!pLevel.isClientSide) {
-//                pPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
+        pPlayer.getCooldowns().addCooldown(itemStack, this.cooldown);
+        if (CloverRandomMethod(itemStack, pLevel, pPlayer)) {
+            pPlayer.swing(pUsedHand, true);
+            if (!pLevel.isClientSide()) {
+                pPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
 //                if (ingredient_namespace != null) {
 //                    pPlayer.sendSystemMessage(Component.literal("当前物品的命名空间: " + ingredient_namespace)); // @debug
 //                }
-//
-//            }
-//            return InteractionResultHolder.sidedSuccess(itemStack, pLevel.isClientSide());
-//        }
+            }
+            return InteractionResult.SUCCESS;
+        }
 
         return InteractionResult.PASS;
     }
@@ -94,11 +95,19 @@ public class MagicCloverItem extends Item {
         return true;
     }
 
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+//    @Override
+//    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+//        IngredientNamespceContent ingredientNamespceContent = stack.get(ComponentRegister.INGREDIENT_NAMESPACE);
+//        DataComponentGetter var4 = null; // @debug
+//        if(ingredientNamespceContent != null) {
+//            ingredientNamespceContent.addToTooltip(context, tooltipComponents::add, tooltipFlag,var4);
+//        }
+//    }
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
         IngredientNamespceContent ingredientNamespceContent = stack.get(ComponentRegister.INGREDIENT_NAMESPACE);
-        DataComponentGetter var4 = null; // @debug
-        if(ingredientNamespceContent != null) {
-            ingredientNamespceContent.addToTooltip(context, tooltipComponents::add, tooltipFlag,var4);
+        if (ingredientNamespceContent != null) {
+            ingredientNamespceContent.addToTooltip(context, builder, tooltipFlag, stack);
         }
     }
 
