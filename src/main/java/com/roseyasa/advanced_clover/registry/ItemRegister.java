@@ -10,6 +10,8 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import static com.roseyasa.advanced_clover.registry.BlockRegister.*;
+import static com.roseyasa.advanced_clover.utils.Utils.createItemKey;
+
 
 public class ItemRegister {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Main.MODID);
@@ -27,13 +29,13 @@ public class ItemRegister {
 
     static {
         // Items
-        ITEM_MAGIC_CLOVER = ITEMS.register(ITEM_MAGIC_CLOVER_ID, MagicCloverItem::new);
+        ITEM_MAGIC_CLOVER = ITEMS.register(ITEM_MAGIC_CLOVER_ID, ()-> new MagicCloverItem(new Item.Properties().setId(createItemKey(ITEM_MAGIC_CLOVER_ID))));
 
         // BlockItems with no BlockEntity
         ITEM_THREE_LEAF_CLOVER = ITEMS.register(ITEM_THREE_LEAF_CLOVER_ID,
-                ()-> new BlockItem(BLOCK_THREE_LEAF_CLOVER.get(),new Item.Properties()));
+                ()-> new BlockItem(BLOCK_THREE_LEAF_CLOVER.get(),new Item.Properties().setId(createItemKey(ITEM_THREE_LEAF_CLOVER_ID))));
         ITEM_FOUR_LEAF_CLOVER = ITEMS.register(ITEM_FOUR_LEAF_CLOVER_ID,
-                ()-> new BlockItem(BLOCK_FOUR_LEAF_CLOVER.get(),new Item.Properties()));
+                ()-> new BlockItem(BLOCK_FOUR_LEAF_CLOVER.get(),new Item.Properties().setId(createItemKey(ITEM_FOUR_LEAF_CLOVER_ID))));
     }
 
 }

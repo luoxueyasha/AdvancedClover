@@ -36,8 +36,8 @@ public class MagicCloverItem extends Item {
 
     private int cooldown = 10;
 
-    public MagicCloverItem() {
-        super(new Properties().component(
+    public MagicCloverItem(Properties properties) {
+        super(properties.component(
                 ComponentRegister.INGREDIENT_NAMESPACE,
                 IngredientNamespceContent.DEFAULT
         ));
@@ -75,9 +75,6 @@ public class MagicCloverItem extends Item {
 //            }
 //            return InteractionResultHolder.sidedSuccess(itemStack, pLevel.isClientSide());
 //        }
-
-        // @debug, 用来调试isbf的1.21
-        itemStack.set(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
 
         return InteractionResult.PASS;
     }
