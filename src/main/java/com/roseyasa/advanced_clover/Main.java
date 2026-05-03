@@ -2,7 +2,7 @@ package com.roseyasa.advanced_clover;
 
 import com.mojang.logging.LogUtils;
 import com.roseyasa.advanced_clover.datagen.MagicCloverBlockModelProvider;
-import com.roseyasa.advanced_clover.datagen.MagicCloverItemModelProvider;
+//import com.roseyasa.advanced_clover.datagen.MagicCloverItemModelProvider;
 import com.roseyasa.advanced_clover.datagen.MagicCloverLootProvider;
 import com.roseyasa.advanced_clover.datagen.MagicCloverRecipeProvider;
 import com.roseyasa.advanced_clover.registry.BlockRegister;
@@ -55,17 +55,14 @@ public class Main {
         var packOutput = gen.getPackOutput();
         var lookupProvider = event.getLookupProvider();
 
-        // 注意：新版 model provider 的构造参数大概率变了，下面以 NeoForge 自带的为例
-        gen.addProvider(true, new MagicCloverBlockModelProvider(packOutput, lookupProvider));
-        gen.addProvider(true, new MagicCloverItemModelProvider(packOutput, lookupProvider));
+//        gen.addProvider(true, new MagicCloverBlockModelProvider(packOutput, lookupProvider));
+//        gen.addProvider(true, new MagicCloverItemModelProvider(packOutput, lookupProvider));
     }
-
     public static void onGatherDataServer(GatherDataEvent.Server event) {
         var gen = event.getGenerator();
         var packOutput = gen.getPackOutput();
         var lookupProvider = event.getLookupProvider();
-
-        gen.addProvider(true, new MagicCloverRecipeProvider(packOutput, lookupProvider));
+        // gen.addProvider(true, new MagicCloverRecipeProvider(packOutput, lookupProvider));
         gen.addProvider(true, new MagicCloverLootProvider(packOutput, lookupProvider));
     }
 }

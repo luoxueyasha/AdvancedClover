@@ -3,6 +3,7 @@ package com.roseyasa.advanced_clover.item;
 import com.roseyasa.advanced_clover.event.MagicCloverEvent;
 import com.roseyasa.advanced_clover.item.content.IngredientNamespceContent;
 import com.roseyasa.advanced_clover.registry.ComponentRegister;
+import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -96,10 +97,11 @@ public class MagicCloverItem extends Item {
         return true;
     }
 
-    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         IngredientNamespceContent ingredientNamespceContent = stack.get(ComponentRegister.INGREDIENT_NAMESPACE);
+        DataComponentGetter var4 = null; // @debug
         if(ingredientNamespceContent != null) {
-            ingredientNamespceContent.addToTooltip(context, tooltipComponents::add, tooltipFlag);
+            ingredientNamespceContent.addToTooltip(context, tooltipComponents::add, tooltipFlag,var4);
         }
     }
 

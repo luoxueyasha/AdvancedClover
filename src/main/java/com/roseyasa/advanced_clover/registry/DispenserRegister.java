@@ -35,7 +35,7 @@ public class DispenserRegister {
             ItemStack randomStack = null;
             Level level = source.level();
             
-            if (!level.isClientSide) {
+            if (!level.isClientSide()) {
                 randomStack = generateRandomItem(level, cloverItemStack);
             }
 
