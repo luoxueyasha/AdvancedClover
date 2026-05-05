@@ -1,9 +1,16 @@
 package com.roseyasa.advanced_clover.event;
 
 import com.roseyasa.advanced_clover.utils.MagicCloverHandler;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -16,7 +23,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+import static com.roseyasa.advanced_clover.Main.MODID;
 import static com.roseyasa.advanced_clover.registry.SoundRegister.SOUND_CLOVER_FAIL;
+import static com.roseyasa.advanced_clover.registry.SoundRegister.SOUND_CLOVER_FAIL_ID;
 import static com.roseyasa.advanced_clover.utils.MagicCloverHandler.*;
 
 public class MagicCloverEvent extends Event implements ICancellableEvent {
@@ -47,6 +56,9 @@ public class MagicCloverEvent extends Event implements ICancellableEvent {
                 if(itemStack == null){
                     this.isSuccess = false;
                     itemStack = RandomFallback();
+                    ((ServerPlayer) player).connection.send(
+                        new ClientboundCustomPayloadPacket(new SoundEffectPayload(SOUND_CLOVER_FAIL_ID))
+                    );
                 } else {
                     this.isSuccess = true;
                 }
@@ -54,6 +66,21 @@ public class MagicCloverEvent extends Event implements ICancellableEvent {
             }
         } else {
             this.isSuccess = false;
+        }
+    }
+
+    public record SoundEffectPayload(String id) implements CustomPacketPayload {
+        public static final Type<SoundEffectPayload> TYPE = new Type<>(Identifier.fromNamespaceAndPath(MODID, "sound_effect"));
+
+        public static final StreamCodec<ByteBuf, SoundEffectPayload> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.STRING_UTF8,
+            SoundEffectPayload::id,
+            SoundEffectPayload::new
+        );
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
         }
     }
 

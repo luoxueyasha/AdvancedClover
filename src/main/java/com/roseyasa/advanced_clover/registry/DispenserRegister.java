@@ -41,14 +41,12 @@ public class DispenserRegister {
 
             if(randomStack != null) {
                 this.setSuccess(true);
-                cloverItemStack.shrink(1);
-                defaultBehavior.dispense(source, randomStack);
             } else {
-                RandomFallback();
                 // @debug
-                cloverItemStack.shrink(1);
-                defaultBehavior.dispense(source, cloverItemStack);
+                randomStack = RandomFallback();
             }
+            cloverItemStack.shrink(1);
+            defaultBehavior.dispense(source, randomStack);
             return cloverItemStack;
         }
     };

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "advanced_clover:four_leaf_clover",
+    "advanced_clover:four_leaf_clover",
+    "advanced_clover:four_leaf_clover"
+  ],
+  "result": {
+    "count": 4,
+    "id": "advanced_clover:three_leaf_clover"
+  }
+}
