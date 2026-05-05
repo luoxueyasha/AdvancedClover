@@ -4,6 +4,7 @@ import com.roseyasa.advanced_clover.utils.MagicCloverHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -15,6 +16,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+import static com.roseyasa.advanced_clover.registry.SoundRegister.SOUND_CLOVER_FAIL;
 import static com.roseyasa.advanced_clover.utils.MagicCloverHandler.*;
 
 public class MagicCloverEvent extends Event implements ICancellableEvent {
@@ -33,21 +35,23 @@ public class MagicCloverEvent extends Event implements ICancellableEvent {
 
     public void execute() {
         if (player != null) {
-            // todo：创造模式下判断背包是否满。若满则抛射一个物品。
+            // @debug, todo：创造模式下判断背包是否满。若满则抛射一个物品。
             // 但是不知道那个版本开始，创造模式additem会忽略上限，我也不知道该怎么办了
             // 暂时先只生成掉落物吧
+            // todo: 苦力怕
 
             //if (!player.hasInfiniteMaterials() && !player.addItem(randomStack)) {
+
             if(!level.isClientSide()) {
                 ItemStack itemStack = MagicCloverHandler.generateRandomItem(level, cloverStack);
                 if(itemStack == null){
                     this.isSuccess = false;
-                    return;
+                    itemStack = RandomFallback();
+                } else {
+                    this.isSuccess = true;
                 }
                 player.drop(itemStack, false);
             }
-            //}
-            this.isSuccess = true;
         } else {
             this.isSuccess = false;
         }

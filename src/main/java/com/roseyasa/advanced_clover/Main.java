@@ -2,12 +2,10 @@ package com.roseyasa.advanced_clover;
 
 import com.mojang.logging.LogUtils;
 //import com.roseyasa.advanced_clover.datagen.MagicCloverItemModelProvider;
-import com.roseyasa.advanced_clover.datagen.MagicCloverLootProvider;
-import com.roseyasa.advanced_clover.registry.BlockRegister;
-import com.roseyasa.advanced_clover.registry.ComponentRegister;
-import com.roseyasa.advanced_clover.registry.DispenserRegister;
-import com.roseyasa.advanced_clover.registry.ItemRegister;
-import com.roseyasa.advanced_clover.registry.RecipeRegister;
+import com.roseyasa.advanced_clover.datagen.MagicCloverRecipeProvider;
+import com.roseyasa.advanced_clover.datagen.MagicCloverSoundProvider;
+import com.roseyasa.advanced_clover.event.EventHandler;
+import com.roseyasa.advanced_clover.registry.*;
 import com.roseyasa.advanced_clover.utils.CreativeTabBuilder;
 import com.roseyasa.advanced_clover.utils.MagicCloverConfig;
 
@@ -36,31 +34,23 @@ public class Main {
         CreativeTabBuilder.CREATIVE_MODE_TABS.register(modEventBus);
         RecipeRegister.RECIPE_SERIALIZERS.register(modEventBus);
         ComponentRegister.DATA_COMPONENT_TYPES.register(modEventBus);
+        SoundRegister.SOUND_EVENTS.register(modEventBus);
 
         // Register dispenser behaviors handler
         modEventBus.register(DispenserRegister.class);
 
         // Register data generation listener
         modEventBus.addListener(Main::onGatherDataClient);
-        modEventBus.addListener(Main::onGatherDataServer);
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, MagicCloverConfig.SPEC);
     }
 
     public static void onGatherDataClient(GatherDataEvent.Client event) {
-        var gen = event.getGenerator();
-        var packOutput = gen.getPackOutput();
-        var lookupProvider = event.getLookupProvider();
+        // var gen = event.getGenerator();
+        event.createProvider(MagicCloverSoundProvider::new);
+        event.createProvider(MagicCloverRecipeProvider.Runner::new);
 
-//        gen.addProvider(true, new MagicCloverBlockModelProvider(packOutput, lookupProvider));
-//        gen.addProvider(true, new MagicCloverItemModelProvider(packOutput, lookupProvider));
     }
-    public static void onGatherDataServer(GatherDataEvent.Server event) {
-        var gen = event.getGenerator();
-        var packOutput = gen.getPackOutput();
-        var lookupProvider = event.getLookupProvider();
-        // gen.addProvider(true, new MagicCloverRecipeProvider(packOutput, lookupProvider));
-        gen.addProvider(true, new MagicCloverLootProvider(packOutput, lookupProvider));
-    }
+
 }

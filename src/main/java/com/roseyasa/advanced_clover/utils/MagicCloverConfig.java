@@ -10,6 +10,7 @@ public class MagicCloverConfig {
 
     public static final ModConfigSpec.ConfigValue<String> WORKING_MODE;
     public static final ModConfigSpec.ConfigValue<List<? extends String>> BLACKLIST_ITEMS;
+    public static final ModConfigSpec.ConfigValue<List<? extends String>> WHITELIST_ITEMS;
 
     static {
         BUILDER.comment("Common Configs for Advanced Clover");
@@ -51,6 +52,20 @@ public class MagicCloverConfig {
                     "minecraft:enchanted_book",
                     "minecraft:goat_horn",
                     "minecraft:vault"
+                ),
+                () -> "",
+                s -> s instanceof String);
+
+        WHITELIST_ITEMS = BUILDER
+            .comment("Items in Magic Clover whitelist. These items will only be spawned if mod is working on whitelist mode.",
+                "Supports wildcard '*'.")
+            .translation("config.advanced_clover.whitelist_items")
+            .defineListAllowEmpty("Whitelist Items",
+                List.of(
+                    "minecraft:diamond",
+                    "aqua*:neptune*",
+                    "minecraft:dirt*",
+                    "minecraft:*wood*"
                 ),
                 () -> "",
                 s -> s instanceof String);

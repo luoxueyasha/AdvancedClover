@@ -14,8 +14,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.concurrent.CompletableFuture;
 
 public class MagicCloverRecipeProvider extends RecipeProvider {
-    public MagicCloverRecipeProvider(RecipeOutput output, HolderLookup.Provider registries) {
-        super(registries, output);
+    protected MagicCloverRecipeProvider(HolderLookup.Provider provider, RecipeOutput output) {
+        super(provider, output);
     }
 
     @Override
@@ -41,5 +41,22 @@ public class MagicCloverRecipeProvider extends RecipeProvider {
     private void buildMagicCloverRecipies() {
         SpecialRecipeBuilder.special(MagicCloverRecipe::new)
             .save(this.output, Main.MODID + ":crafting_special_magic_clover");
+    }
+
+    public static class Runner extends RecipeProvider.Runner {
+        // Get the parameters from the `GatherDataEvent`s.
+        public Runner(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+            super(output, lookupProvider);
+        }
+
+        @Override
+        protected RecipeProvider createRecipeProvider(HolderLookup.Provider provider, RecipeOutput output) {
+            return new MagicCloverRecipeProvider(provider, output);
+        }
+
+        @Override
+        public String getName() {
+            return Main.MODID+":RecipeProvider";
+        }
     }
 }

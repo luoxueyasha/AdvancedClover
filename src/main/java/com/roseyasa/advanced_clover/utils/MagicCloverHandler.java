@@ -1,10 +1,11 @@
 package com.roseyasa.advanced_clover.utils;
 
+import com.roseyasa.advanced_clover.item.MagicCloverItem;
 import com.roseyasa.advanced_clover.item.content.IngredientNamespceContent;
 import com.roseyasa.advanced_clover.registry.ComponentRegister;
-import com.roseyasa.advanced_clover.utils.MagicCloverConfig;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -13,9 +14,13 @@ import net.neoforged.neoforge.common.NeoForge;
 
 import java.util.*;
 
+import static com.roseyasa.advanced_clover.registry.ItemRegister.ITEM_FOUR_LEAF_CLOVER;
+import static com.roseyasa.advanced_clover.registry.SoundRegister.SOUND_CLOVER_FAIL;
+import static com.roseyasa.advanced_clover.utils.MagicCloverConfig.WORKING_MODE;
+
 public class MagicCloverHandler {
     private static final Map<String, List<Item>> NAMESPACE_ITEMS = new HashMap<>();
-    private static final List<String> BLACKLISTED_ITEMS = new ArrayList<String>();
+    private static final List<String> LISTED_ITEMS = new ArrayList<String>();
 
     public static void updateItemsList() {
         Event event = new UpdateItemsListEvent();
@@ -24,6 +29,7 @@ public class MagicCloverHandler {
     }
 
     public static class UpdateItemsListEvent extends Event {
+
         public UpdateItemsListEvent() {
             NAMESPACE_ITEMS.clear();
             // 按命名空间分组收集物品
@@ -33,16 +39,42 @@ public class MagicCloverHandler {
                     NAMESPACE_ITEMS.computeIfAbsent(namespace, k -> new java.util.ArrayList<>()).add(item);
                 });
 
+            LISTED_ITEMS.clear();
+            if(WORKING_MODE.get().equals("whitelist")){
+                updateWhiteList();
+            } else {
+                updateBlackList();
+            }
+
+
+        }
+
+        private static void updateBlackList(){
             // 更新黑名单
-            BLACKLISTED_ITEMS.clear();
-            BLACKLISTED_ITEMS.addAll(MagicCloverConfig.BLACKLIST_ITEMS.get());
+            LISTED_ITEMS.addAll(MagicCloverConfig.BLACKLIST_ITEMS.get());
 
             // 处理通配符黑名单
             NAMESPACE_ITEMS.forEach((namespace, items) -> {
                 items.removeIf(item -> {
                     String itemId = BuiltInRegistries.ITEM.getKey(item).toString();
                     // 检查是否匹配任何黑名单规则（包括通配符）
-                    return BLACKLISTED_ITEMS.stream().anyMatch(pattern ->
+                    return LISTED_ITEMS.stream().anyMatch(pattern ->
+                        itemId.matches(pattern.replace("*", ".*"))
+                    );
+                });
+            });
+        }
+
+        private static void updateWhiteList(){
+            // 更新白名单
+            LISTED_ITEMS.addAll(MagicCloverConfig.WHITELIST_ITEMS.get());
+
+            // 处理通配符白名单
+            NAMESPACE_ITEMS.forEach((namespace, items) -> {
+                items.removeIf(item -> {
+                    String itemId = BuiltInRegistries.ITEM.getKey(item).toString();
+                    // 检查是否匹配任何白名单规则（包括通配符）
+                    return LISTED_ITEMS.stream().noneMatch(pattern ->
                         itemId.matches(pattern.replace("*", ".*"))
                     );
                 });
@@ -67,15 +99,15 @@ public class MagicCloverHandler {
             return null;
         }
 
-        // 随机选择物品，如果在黑名单中就重新选择
+        // 随机选择物品
         Item randomItem;
-        //do {
         randomItem = itemList.get(level.getRandom().nextInt(itemList.size()));
-        //} while (BLACKLISTED_ITEMS.contains(randomItem.toString())
-        //        && itemList.size() > 1); // 防止无限循环
-
-        // @debug, 这里处理的并不正确。具体见备忘吧
 
         return new ItemStack(randomItem);
+    }
+
+
+    public static ItemStack RandomFallback(){
+        return new ItemStack(ITEM_FOUR_LEAF_CLOVER.get());
     }
 }

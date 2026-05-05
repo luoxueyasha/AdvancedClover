@@ -1,16 +1,19 @@
 package com.roseyasa.advanced_clover.event;
 
+import com.roseyasa.advanced_clover.Main;
 import com.roseyasa.advanced_clover.utils.MagicCloverHandler;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.LootTableLoadEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 
-@EventBusSubscriber
-// @debug, 记得用上
+import static com.roseyasa.advanced_clover.Main.MODID;
+
+@EventBusSubscriber(value = Dist.CLIENT,modid = MODID)
+
 public class EventHandler {
     @SubscribeEvent
-    public static void onDatapackReload(LootTableLoadEvent event) {
+    public static void onClientLoad(FMLCommonSetupEvent event) {
         MagicCloverHandler.updateItemsList();
     }
 }

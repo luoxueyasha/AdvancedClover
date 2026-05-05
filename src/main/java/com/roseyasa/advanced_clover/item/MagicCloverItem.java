@@ -9,6 +9,8 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -34,9 +36,11 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Consumer;
 
+import static com.roseyasa.advanced_clover.registry.SoundRegister.SOUND_CLOVER_FAIL;
+
 public class MagicCloverItem extends Item {
 
-    private int cooldown = 10;
+    private int cooldown = 20;
 
     public MagicCloverItem(Properties properties) {
         super(properties.component(
@@ -61,20 +65,19 @@ public class MagicCloverItem extends Item {
     @Override
     public @NotNull InteractionResult use(@NotNull Level pLevel, @NotNull Player pPlayer, @NotNull InteractionHand pUsedHand) {
         ItemStack itemStack = pPlayer.getItemInHand(pUsedHand);
-        
-        // @debug，添加调试信息，显示存储的命名空间
-//        IngredientNamespceContent ingredient_namespace = itemStack.get(ComponentRegister.INGREDIENT_NAMESPACE);
 
         pPlayer.getCooldowns().addCooldown(itemStack, this.cooldown);
+        pPlayer.swing(pUsedHand, true);
+
+
         if (CloverRandomMethod(itemStack, pLevel, pPlayer)) {
-            pPlayer.swing(pUsedHand, true);
-            if (!pLevel.isClientSide()) {
-                pPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
-//                if (ingredient_namespace != null) {
-//                    pPlayer.sendSystemMessage(Component.literal("当前物品的命名空间: " + ingredient_namespace)); // @debug
-//                }
-            }
+            pPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
             return InteractionResult.SUCCESS;
+        } else {
+            // @debug, 失败放屁
+            // pLevel.playPlayerSound(SOUND_CLOVER_FAIL.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
+            double random = 0.8 + (1.6 - 0.8) * Math.random();
+            pLevel.playPlayerSound(SOUND_CLOVER_FAIL.get(), SoundSource.PLAYERS, 0.8F, (float) random);
         }
 
         return InteractionResult.PASS;
@@ -87,12 +90,12 @@ public class MagicCloverItem extends Item {
         NeoForge.EVENT_BUS.post(event);
 
         if (event.isCanceled()) {
-            return event.isSuccessful();
+            return event.isSuccess();
         }
 
         itemStack.consume(1, player);
 
-        return true;
+        return event.isSuccess();
     }
 
     @Override
