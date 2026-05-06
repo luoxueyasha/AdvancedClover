@@ -1,18 +1,5 @@
 {
-  "itemGroup.advanced_clover": "Example Mod Tab",
-  "block.advanced_clover.example_block": "Example Block",
-  "item.advanced_clover.example_item": "Example Item",
-
-  "advanced_clover.configuration.title": "Advanced Clover Configs",
-  "advanced_clover.configuration.section.advanced_clover.common.toml": "Advanced Clover Configs",
-  "advanced_clover.configuration.section.advanced_clover.common.toml.title": "Advanced Clover Configs",
-  "advanced_clover.configuration.items": "Item List",
-  "advanced_clover.configuration.logDirtBlock": "Log Dirt Block",
-  "advanced_clover.configuration.magicNumberIntroduction": "Magic Number Text",
-  "advanced_clover.configuration.magicNumber": "Magic Number"
-  
-  
-    "itemGroup.advanced_clover.name": "Advanced Clover",
+  "itemGroup.advanced_clover.name": "Advanced Clover",
 
   "#comment.for_translators_0": "Dear translators:",
   "#comment.for_translators_1": "`Clover` references to the tribe Trifolieae, which contains three-leaf plants like Medicago, Trifolium, etc.",
@@ -23,9 +10,10 @@
   "block.advanced_clover.three_leaf_clover": "Clover",
   "block.advanced_clover.four_leaf_clover": "Four-leaf Clover",
   "item.advanced_clover.magic_clover": "Magic Clover",
-  "tooltip.advanced_clover.random_source.vanilla": "Randomly throws one Vanilla Minecraft item",
-  "tooltip.advanced_clover.random_source.mod": "Randomly throws one \"%s\" item",
+  "tooltip.advanced_clover.random_source.vanilla": "Randomly throws a Minecraft item",
+  "tooltip.advanced_clover.random_source.mod": "Randomly throws a(n) \"%s\" item",
   "tooltip.advanced_clover.random_source.none": "No random source",
+  "sound.advanced_clover.clover_fail": "Clover Failed",
 
   "config.advanced_clover.item_settings": "Item Settings"
 }

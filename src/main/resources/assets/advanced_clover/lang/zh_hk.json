@@ -12,5 +12,6 @@
   "item.advanced_clover.magic_clover": "魔法四葉草",
   "tooltip.advanced_clover.random_source.vanilla": "隨機擲出一件Minecraft原版物品",
   "tooltip.advanced_clover.random_source.mod": "隨機擲出一件「%s」物品",
-  "tooltip.advanced_clover.random_source.none": "無隨機源"
+  "tooltip.advanced_clover.random_source.none": "無隨機源",
+  "sound.advanced_clover.clover_fail": "四葉草：失敗"
 }

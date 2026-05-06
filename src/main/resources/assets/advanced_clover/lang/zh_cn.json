@@ -13,6 +13,5 @@
   "tooltip.advanced_clover.random_source.vanilla": "随机掷出一件Minecraft原版物品",
   "tooltip.advanced_clover.random_source.mod": "随机掷出一件“%s”物品",
   "tooltip.advanced_clover.random_source.none": "无随机源",
-
-  "config.advanced_clover.item_settings": "物品设置设置设置"
+  "sound.advanced_clover.clover_fail": "四叶草：失败"
 }

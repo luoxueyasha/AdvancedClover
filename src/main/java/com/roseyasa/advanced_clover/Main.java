@@ -4,7 +4,6 @@ import com.mojang.logging.LogUtils;
 //import com.roseyasa.advanced_clover.datagen.MagicCloverItemModelProvider;
 import com.roseyasa.advanced_clover.datagen.MagicCloverRecipeProvider;
 import com.roseyasa.advanced_clover.datagen.MagicCloverSoundProvider;
-import com.roseyasa.advanced_clover.event.EventHandler;
 import com.roseyasa.advanced_clover.registry.*;
 import com.roseyasa.advanced_clover.utils.CreativeTabBuilder;
 import com.roseyasa.advanced_clover.utils.MagicCloverConfig;

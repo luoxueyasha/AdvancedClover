@@ -1,6 +1,5 @@
 package com.roseyasa.advanced_clover.event;
 
-import com.roseyasa.advanced_clover.Main;
 import com.roseyasa.advanced_clover.utils.MagicCloverHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.sounds.SoundSource;
@@ -17,13 +16,9 @@ import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import static com.roseyasa.advanced_clover.Main.MODID;
 import static com.roseyasa.advanced_clover.registry.SoundRegister.SOUND_CLOVER_FAIL;
 
-@EventBusSubscriber(value = Dist.CLIENT,modid = MODID)
+@EventBusSubscriber(value = Dist.DEDICATED_SERVER,modid = MODID)
 
-public class EventHandler {
-    @SubscribeEvent
-    public static void onClientLoad(FMLCommonSetupEvent event) {
-        MagicCloverHandler.updateItemsList();
-    }
+public class ServerEventHandler {
 
     @SubscribeEvent
     public static void registerPayloads(RegisterPayloadHandlersEvent event) {
@@ -35,18 +30,4 @@ public class EventHandler {
         );
     }
 
-    @SubscribeEvent
-    public static void registerClientPayloadHandlers(RegisterClientPayloadHandlersEvent event) {
-        event.register( MagicCloverEvent.SoundEffectPayload.TYPE, (payload, context) -> { context.enqueueWork(() -> {
-            // @debug, 会不会让所有人都听见？
-            Player player = Minecraft.getInstance().player;
-            Level level = Minecraft.getInstance().level;
-            if (level != null && player != null) {
-                if ("clover_fail".equals(payload.id())) {
-                    double random = 0.8 + (1.6 - 0.8) * Math.random();
-                    level.playPlayerSound(SOUND_CLOVER_FAIL.get(), SoundSource.PLAYERS, 0.8F, (float) random);
-                }
-            }
-        });});
-    }
 }

@@ -13,5 +13,6 @@
   "item.advanced_clover.magic_clover": "神力四葉酢漿",
   "tooltip.advanced_clover.random_source.vanilla": "擲「礦藝」物一",
   "tooltip.advanced_clover.random_source.mod": "擲「%s」物一",
-  "tooltip.advanced_clover.random_source.none": "無隨機之根"
+  "tooltip.advanced_clover.random_source.none": "無隨機根",
+  "sound.advanced_clover.clover_fail": "四葉酢漿：敗"
 }

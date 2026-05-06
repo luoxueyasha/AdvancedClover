@@ -94,6 +94,10 @@ public class MagicCloverHandler {
         }
 
         // 获取对应命名空间的物品列表
+        // @DEBUG：获取命名空间的物品列表和entity列表
+        int randomMob = level.getRandom().nextInt();
+
+
         List<Item> itemList = NAMESPACE_ITEMS.get(content.namespace());
         if (itemList == null || itemList.isEmpty()) {
             return null;

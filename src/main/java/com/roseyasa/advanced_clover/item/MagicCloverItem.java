@@ -73,12 +73,6 @@ public class MagicCloverItem extends Item {
         if (CloverRandomMethod(itemStack, pLevel, pPlayer)) {
             pPlayer.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
             return InteractionResult.SUCCESS;
-//        } else {
-//            // @debug, 失败放屁
-//            // pLevel.playPlayerSound(SOUND_CLOVER_FAIL.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
-//            // 现在的问题是本地不知道远端是否成功失败，得自己写一个发包
-//            double random = 0.8 + (1.6 - 0.8) * Math.random();
-//            pLevel.playPlayerSound(SOUND_CLOVER_FAIL.get(), SoundSource.PLAYERS, 0.8F, (float) random);
         }
 
         return InteractionResult.PASS;
@@ -105,6 +99,11 @@ public class MagicCloverItem extends Item {
         if (ingredientNamespceContent != null) {
             ingredientNamespceContent.addToTooltip(context, builder, tooltipFlag, stack);
         }
+    }
+
+    @Override
+    public boolean isFoil(ItemStack itemStack){
+        return true;
     }
 
 

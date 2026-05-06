@@ -17,9 +17,10 @@ import net.minecraft.world.level.Level;
 public class MagicCloverRecipe extends CustomRecipe {
     public static final MapCodec<MagicCloverRecipe> MAP_CODEC = MapCodec.unit(MagicCloverRecipe::new);
     public static final StreamCodec<RegistryFriendlyByteBuf, MagicCloverRecipe> STREAM_CODEC =
-        StreamCodec.unit(new MagicCloverRecipe());
+        StreamCodec.of((buf, recipe) -> {}, buf -> new MagicCloverRecipe());
     public static final RecipeSerializer<MagicCloverRecipe> SERIALIZER =
         new RecipeSerializer<>(MAP_CODEC, STREAM_CODEC);
+
     public MagicCloverRecipe() {
         super();
     }
@@ -56,11 +57,7 @@ public class MagicCloverRecipe extends CustomRecipe {
         result.set(ComponentRegister.INGREDIENT_NAMESPACE, new IngredientNamespceContent(id.getNamespace()));
         return result;
     }
-    // @debug
-//    @Override
-//    public boolean canCraftInDimensions(int width, int height) {
-//        return width * height >= 2;
-//    }
+
     @Override
     public RecipeSerializer<MagicCloverRecipe> getSerializer() {
         return RecipeRegister.MAGIC_CLOVER_RECIPE.get();
