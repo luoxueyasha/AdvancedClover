@@ -17,7 +17,7 @@ import net.minecraft.world.item.component.TooltipProvider;
 import java.util.function.Consumer;
 
 public record IngredientNamespceContent(String namespace) implements TooltipProvider {
-    public static final IngredientNamespceContent DEFAULT = new IngredientNamespceContent("minecraft");
+    public static final IngredientNamespceContent DEFAULT = null;// new IngredientNamespceContent("minecraft");
 
     public static final Codec<IngredientNamespceContent> CODEC = RecordCodecBuilder.create((builder) -> {
         return builder.group(
@@ -42,9 +42,12 @@ public record IngredientNamespceContent(String namespace) implements TooltipProv
             return;
         }
         
-        String key = this.namespace.equals("minecraft") ? 
-            "tooltip." + Main.MODID + ".random_source.vanilla" :
-            "tooltip." + Main.MODID + ".random_source.mod";
+        String key;
+        if(this.namespace.equals("minecraft")) {
+            key = "tooltip." + Main.MODID + ".random_source.vanilla";
+        } else {
+            key = "tooltip." +Main.MODID +".random_source.mod";
+        }
         consumer.accept(Component.translatable(key, this.namespace).withStyle(ChatFormatting.GRAY));
     }
 }

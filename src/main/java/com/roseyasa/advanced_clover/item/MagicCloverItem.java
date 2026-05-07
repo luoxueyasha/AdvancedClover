@@ -40,7 +40,7 @@ import static com.roseyasa.advanced_clover.registry.SoundRegister.SOUND_CLOVER_F
 
 public class MagicCloverItem extends Item {
 
-    private int cooldown = 20;
+    private int cooldown = 16;
 
     public MagicCloverItem(Properties properties) {
         super(properties.component(
@@ -96,9 +96,10 @@ public class MagicCloverItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
         IngredientNamespceContent ingredientNamespceContent = stack.get(ComponentRegister.INGREDIENT_NAMESPACE);
-        if (ingredientNamespceContent != null) {
-            ingredientNamespceContent.addToTooltip(context, builder, tooltipFlag, stack);
+        if (ingredientNamespceContent == null) {
+            ingredientNamespceContent = new IngredientNamespceContent(null);
         }
+        ingredientNamespceContent.addToTooltip(context,builder, tooltipFlag, stack);
     }
 
     @Override

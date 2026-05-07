@@ -13,6 +13,7 @@ import net.neoforged.bus.api.Event;
 import net.neoforged.neoforge.common.NeoForge;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.roseyasa.advanced_clover.registry.ItemRegister.ITEM_FOUR_LEAF_CLOVER;
 import static com.roseyasa.advanced_clover.registry.SoundRegister.SOUND_CLOVER_FAIL;
@@ -32,7 +33,6 @@ public class MagicCloverHandler {
 
         public UpdateItemsListEvent() {
             NAMESPACE_ITEMS.clear();
-            // 按命名空间分组收集物品
             BuiltInRegistries.ITEM.stream()
                 .forEach(item -> {
                     String namespace = BuiltInRegistries.ITEM.getKey(item).getNamespace();
@@ -53,11 +53,9 @@ public class MagicCloverHandler {
             // 更新黑名单
             LISTED_ITEMS.addAll(MagicCloverConfig.BLACKLIST_ITEMS.get());
 
-            // 处理通配符黑名单
             NAMESPACE_ITEMS.forEach((namespace, items) -> {
                 items.removeIf(item -> {
                     String itemId = BuiltInRegistries.ITEM.getKey(item).toString();
-                    // 检查是否匹配任何黑名单规则（包括通配符）
                     return LISTED_ITEMS.stream().anyMatch(pattern ->
                         itemId.matches(pattern.replace("*", ".*"))
                     );
@@ -69,11 +67,9 @@ public class MagicCloverHandler {
             // 更新白名单
             LISTED_ITEMS.addAll(MagicCloverConfig.WHITELIST_ITEMS.get());
 
-            // 处理通配符白名单
             NAMESPACE_ITEMS.forEach((namespace, items) -> {
                 items.removeIf(item -> {
                     String itemId = BuiltInRegistries.ITEM.getKey(item).toString();
-                    // 检查是否匹配任何白名单规则（包括通配符）
                     return LISTED_ITEMS.stream().noneMatch(pattern ->
                         itemId.matches(pattern.replace("*", ".*"))
                     );
@@ -90,10 +86,22 @@ public class MagicCloverHandler {
         // 获取命名空间设置
         IngredientNamespceContent content = cloverStack.get(ComponentRegister.INGREDIENT_NAMESPACE);
         if (content == null || content.namespace() == null) {
-            return null;
+            // return null;
+            // 获取任意的内容（只能通过编辑component实现）
+            List<List<Item>> nonEmptyLists = NAMESPACE_ITEMS.values().stream()
+                .filter(list -> list != null && !list.isEmpty())
+                .toList();
+
+            if (nonEmptyLists.isEmpty()) {
+                return null;
+            }
+
+            List<Item> itemList = nonEmptyLists.get(level.getRandom().nextInt(nonEmptyLists.size()));
+            Item randomItem = itemList.get(level.getRandom().nextInt(itemList.size()));
+            return new ItemStack(randomItem);
+
         }
 
-        // 获取对应命名空间的物品列表
         // @DEBUG：获取命名空间的物品列表和entity列表
         int randomMob = level.getRandom().nextInt();
 
@@ -103,7 +111,6 @@ public class MagicCloverHandler {
             return null;
         }
 
-        // 随机选择物品
         Item randomItem;
         randomItem = itemList.get(level.getRandom().nextInt(itemList.size()));
 
