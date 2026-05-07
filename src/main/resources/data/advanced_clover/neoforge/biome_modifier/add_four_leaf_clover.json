@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#advanced_clover:has_clover",
+  "features": "advanced_clover:four_leaf_clover",
+  "step": "vegetal_decoration"
+}

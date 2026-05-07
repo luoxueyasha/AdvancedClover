@@ -13,5 +13,15 @@
   "tooltip.advanced_clover.random_source.vanilla": "隨機擲出一件Minecraft原版物品",
   "tooltip.advanced_clover.random_source.mod": "隨機擲出一件「%s」物品",
   "tooltip.advanced_clover.random_source.none": "無隨機源",
-  "sound.advanced_clover.clover_fail": "四葉草：失敗"
+  "sound.advanced_clover.clover_fail": "四葉草：失敗",
+
+  "advanced_clover.configuration.mode_settings" : "工作模式設置",
+  "config.advanced_clover.working_mode" : "工作模式",
+  "config.advanced_clover.blacklist_items" : "黑名單",
+  "config.advanced_clover.whitelist_items" : "白名單",
+  "advanced_clover.configuration.title": "進階四葉草",
+  "advanced_clover.configuration.mode_settings.tooltip": "設置魔法四葉草的工作模式相關内容。",
+  "config.advanced_clover.working_mode.tooltip": "魔法四葉草的工作模式（黑/白名單）。值接受“whitelist”或“blacklist”。",
+  "config.advanced_clover.blacklist_items.tooltip": "若工作模式為“blacklist”，則不會出現與其中id匹配的物品。支持通配符'*'。",
+  "config.advanced_clover.whitelist_items.tooltip": "若工作模式為“whitelist”，則僅會出現與其中id匹配的物品。支持通配符'*'。"
 }

@@ -1,0 +1,50 @@
+{
+  "type": "minecraft:simple_block",
+  "config": {
+    "to_place": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "advanced_clover:four_leaf_clover",
+            "Properties": {
+              "facing": "north",
+              "flower_amount": "1"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "advanced_clover:four_leaf_clover",
+            "Properties": {
+              "facing": "east",
+              "flower_amount": "1"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "advanced_clover:four_leaf_clover",
+            "Properties": {
+              "facing": "south",
+              "flower_amount": "1"
+            }
+          },
+          "weight": 1
+        },
+        {
+          "data": {
+            "Name": "advanced_clover:four_leaf_clover",
+            "Properties": {
+              "facing": "west",
+              "flower_amount": "1"
+            }
+          },
+          "weight": 1
+        }
+      ]
+    }
+  }
+}

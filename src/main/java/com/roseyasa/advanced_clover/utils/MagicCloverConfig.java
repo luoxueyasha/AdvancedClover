@@ -11,11 +11,13 @@ public class MagicCloverConfig {
     public static final ModConfigSpec.ConfigValue<String> WORKING_MODE;
     public static final ModConfigSpec.ConfigValue<List<? extends String>> BLACKLIST_ITEMS;
     public static final ModConfigSpec.ConfigValue<List<? extends String>> WHITELIST_ITEMS;
+    public static final ModConfigSpec.ConfigValue<Integer> THREE_LEAF_CLOVER_TRIES;
+    public static final ModConfigSpec.ConfigValue<Integer> FOUR_LEAF_CLOVER_TRIES;
 
     static {
         BUILDER.comment("Common Configs for Advanced Clover");
 
-        BUILDER.push("Mode Settings");
+        BUILDER.push("mode_settings");
 
         WORKING_MODE = BUILDER
             .comment("Working mode of the magic clover. Avaliable values are",
@@ -69,6 +71,18 @@ public class MagicCloverConfig {
                 ),
                 () -> "",
                 s -> s instanceof String);
+
+        BUILDER.pop();
+
+        BUILDER.push("world_gen");
+
+        THREE_LEAF_CLOVER_TRIES = BUILDER
+            .comment("Number of generation attempts for three-leaf clover per chunk.")
+            .defineInRange("threeLeafCloverTries", 60, 1, 512);
+
+        FOUR_LEAF_CLOVER_TRIES = BUILDER
+            .comment("Number of generation attempts for four-leaf clover per chunk.")
+            .defineInRange("fourLeafCloverTries", 1, 1, 512);
 
         BUILDER.pop();
     }

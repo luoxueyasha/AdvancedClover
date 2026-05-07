@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+        "#c:is_forest",
+        "#c:is_birch_forest",
+        "#c:is_flower_forest",
+        "#c:is_floral",
+        "#c:is_plains",
+        "#c:is_savanna",
+        "#c:is_plateau",
+        "#minecraft:is_hill"
+  ]
+}

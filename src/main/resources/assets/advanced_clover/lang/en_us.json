@@ -15,5 +15,13 @@
   "tooltip.advanced_clover.random_source.none": "No random source",
   "sound.advanced_clover.clover_fail": "Clover Failed",
 
-  "config.advanced_clover.item_settings": "Item Settings"
+  "advanced_clover.configuration.mode_settings" : "Mode Settings",
+  "config.advanced_clover.working_mode" : "Working Mode",
+  "config.advanced_clover.blacklist_items" : "Blacklist Items",
+  "config.advanced_clover.whitelist_items" : "Whitelist Items",
+  "advanced_clover.configuration.title": "Advanced Clover",
+  "advanced_clover.configuration.mode_settings.tooltip": "Magic Clover working mode settings.",
+  "config.advanced_clover.working_mode.tooltip": "Working mode of Magic Clover. Accept 'blacklist' or 'whitelist'.",
+  "config.advanced_clover.blacklist_items.tooltip": "If working mode is 'blacklist', block items with pairing ids. Supports wildcard '*'.",
+  "config.advanced_clover.whitelist_items.tooltip": "If working mode is 'whitelist', allow items with pairing ids. Supports wildcard '*'."
 }
