@@ -5,6 +5,8 @@ import com.roseyasa.advanced_clover.item.content.IngredientNamespceContent;
 import com.roseyasa.advanced_clover.registry.ComponentRegister;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -121,6 +123,11 @@ public class MagicCloverHandler {
         randomItem = itemList.get(level.getRandom().nextInt(itemList.size()));
 
         return new ItemStack(randomItem);
+    }
+
+    public static EntityType generateRandomMob(Level level, ItemStack cloverStack){
+        // @debug, 目前我们固定只返回一只creeper
+        return EntityType.CREEPER;
     }
 
 

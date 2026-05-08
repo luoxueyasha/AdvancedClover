@@ -11,8 +11,7 @@ public class MagicCloverConfig {
     public static final ModConfigSpec.ConfigValue<String> WORKING_MODE;
     public static final ModConfigSpec.ConfigValue<List<? extends String>> BLACKLIST_ITEMS;
     public static final ModConfigSpec.ConfigValue<List<? extends String>> WHITELIST_ITEMS;
-    public static final ModConfigSpec.ConfigValue<Integer> THREE_LEAF_CLOVER_TRIES;
-    public static final ModConfigSpec.ConfigValue<Integer> FOUR_LEAF_CLOVER_TRIES;
+    public static final ModConfigSpec.ConfigValue<Integer> MOB_SPAWN_CHANCE;
 
     static {
         BUILDER.comment("Common Configs for Advanced Clover");
@@ -72,19 +71,14 @@ public class MagicCloverConfig {
                 () -> "",
                 s -> s instanceof String);
 
-        BUILDER.pop();
-
-        BUILDER.push("world_gen");
-
-        THREE_LEAF_CLOVER_TRIES = BUILDER
-            .comment("Number of generation attempts for three-leaf clover per chunk.")
-            .defineInRange("threeLeafCloverTries", 60, 1, 512);
-
-        FOUR_LEAF_CLOVER_TRIES = BUILDER
-            .comment("Number of generation attempts for four-leaf clover per chunk.")
-            .defineInRange("fourLeafCloverTries", 1, 1, 512);
+        MOB_SPAWN_CHANCE = BUILDER
+            .comment("Chance to spawn mob when using clover. Range 0 ~ 1000, default value 10(1%).")
+            .translation("config.advanced_clover.mob_spawn_chance")
+            .defineInRange("mobSpawnChance", 10, 0, 1000);
 
         BUILDER.pop();
+
+
     }
 
     public static final ModConfigSpec SPEC = BUILDER.build();

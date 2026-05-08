@@ -21,6 +21,7 @@
   "config.advanced_clover.blacklist_items" : "蔽物",
   "config.advanced_clover.whitelist_items" : "開物",
   "advanced_clover.configuration.title": "進階酢漿",
+  "config.advanced_clover.mob_spawn_chance": "生怪之率",
   "advanced_clover.configuration.mode_settings.tooltip": "校神力四葉酢漿。",
   "config.advanced_clover.working_mode.tooltip": "神力四葉酢漿之方（黑/白簿）。取“whitelist”“blacklist”其一。",
   "config.advanced_clover.blacklist_items.tooltip": "若工為“blacklist”，蔽id與之中相配之物。'*'以通配。",
