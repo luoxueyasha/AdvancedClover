@@ -40,7 +40,7 @@ import static com.roseyasa.advanced_clover.registry.SoundRegister.SOUND_CLOVER_F
 
 public class MagicCloverItem extends Item {
 
-    private int cooldown = 16;
+    private int cooldown = 10;
 
     public MagicCloverItem(Properties properties) {
         super(properties.component(
