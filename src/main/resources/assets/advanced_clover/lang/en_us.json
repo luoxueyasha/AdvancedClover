@@ -13,6 +13,7 @@
   "tooltip.advanced_clover.random_source.vanilla": "Randomly throws a Minecraft item",
   "tooltip.advanced_clover.random_source.mod": "Randomly throws a(n) \"%s\" item",
   "tooltip.advanced_clover.random_source.none": "No random source",
+  "tooltip.advanced_clover.entity_type.custom": "Has a feeling of \"%s\"...",
   "sound.advanced_clover.clover_fail": "Clover Failed",
 
   "advanced_clover.configuration.mode_settings" : "Mode Settings",

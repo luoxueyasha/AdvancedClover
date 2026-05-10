@@ -96,7 +96,7 @@ public class MagicCloverHandler {
 
         IngredientNamespceContent content = cloverStack.get(ComponentRegister.INGREDIENT_NAMESPACE);
         if (content == null || content.namespace() == null) {
-            // 获取任意物品（只能通过编辑component实现）
+            // 如果namespace为空，获取任意物品（只能通过编辑component实现）
             List<List<Item>> nonEmptyLists = ALL_ITEMS.values().stream()
                 .filter(list -> list != null && !list.isEmpty())
                 .toList();
@@ -119,15 +119,15 @@ public class MagicCloverHandler {
             return null;
         }
 
-        Item randomItem;
-        randomItem = itemList.get(level.getRandom().nextInt(itemList.size()));
+        Item randomItem = itemList.get(level.getRandom().nextInt(itemList.size()));
 
         return new ItemStack(randomItem);
     }
 
     public static EntityType generateRandomMob(Level level, ItemStack cloverStack){
         // @debug, 目前我们固定只返回一只creeper
-        return EntityType.CREEPER;
+        //return EntityType.CREEPER;
+        return EntityType.ENDER_PEARL;
     }
 
 

@@ -13,6 +13,7 @@
   "tooltip.advanced_clover.random_source.vanilla": "随机掷出一件Minecraft原版物品",
   "tooltip.advanced_clover.random_source.mod": "随机掷出一件“%s”物品",
   "tooltip.advanced_clover.random_source.none": "无随机源",
+  "tooltip.advanced_clover.entity_type.custom": "有一种“%s”的预感……",
   "sound.advanced_clover.clover_fail": "四叶草：失败",
 
 

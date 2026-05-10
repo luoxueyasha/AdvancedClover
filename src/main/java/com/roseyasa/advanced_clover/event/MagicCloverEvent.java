@@ -1,35 +1,27 @@
 package com.roseyasa.advanced_clover.event;
 
+import com.roseyasa.advanced_clover.registry.ComponentRegister;
 import com.roseyasa.advanced_clover.utils.MagicCloverHandler;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.ICancellableEvent;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-
 import static com.roseyasa.advanced_clover.Main.MODID;
-import static com.roseyasa.advanced_clover.registry.SoundRegister.SOUND_CLOVER_FAIL;
 import static com.roseyasa.advanced_clover.registry.SoundRegister.SOUND_CLOVER_FAIL_ID;
 import static com.roseyasa.advanced_clover.utils.MagicCloverConfig.MOB_SPAWN_CHANCE;
 import static com.roseyasa.advanced_clover.utils.MagicCloverHandler.*;
@@ -63,21 +55,28 @@ public class MagicCloverEvent extends Event implements ICancellableEvent {
             return;
         }
 
+        // @debug. todo：现在所有的mob处理都跑到这里了。备选方案1：仅过滤creeper，只有creeper适用chance；备选方案2：在ComponentRegister.ENTITY_TYPE 实现内部写个boolean值
+        String mob_type = cloverStack.get(ComponentRegister.ENTITY_TYPE).entity_type();
+        if(mob_type != null) {
+            EntityType entityType = BuiltInRegistries.ENTITY_TYPE.getValue(Identifier.parse(mob_type));
+            boolean success = createRandomEntity(level, player, entityType);
+            if(!success){
+                failOnEntitySpawn(player);
+            }
+            return;
+
+        }
+
+
         int mob_spawn_chance = MOB_SPAWN_CHANCE.get();
         if(mob_spawn_chance == 1000 || mob_spawn_chance > level.getRandom().nextInt(1000)){
             EntityType entitytype = generateRandomMob(level, cloverStack);
-            if(entitytype != null) {
-                Entity entity = entitytype.create(level, EntitySpawnReason.SPAWN_ITEM_USE);
-                if(entity == null){
-                    failOnEntitySpawn(player);
-                    return;
-                }
-                Vec3 pos = player.position();
-                entity.setPos(pos.x, pos.y + 0.2, pos.z);
-                level.addFreshEntity(entity);
-                this.isSuccess = true;
-
-            } else{
+            if(entitytype == null) {
+                failOnEntitySpawn(player);
+                return;
+            }
+            boolean success = createRandomEntity(level, player, entitytype);
+            if(!success){
                 failOnEntitySpawn(player);
             }
             return;
@@ -116,6 +115,19 @@ public class MagicCloverEvent extends Event implements ICancellableEvent {
         public Type<? extends CustomPacketPayload> type() {
             return TYPE;
         }
+    }
+
+    private boolean createRandomEntity(Level level, Player player, EntityType entityType){
+        Entity entity = entityType.create(level, EntitySpawnReason.SPAWN_ITEM_USE);
+        if(entity == null){
+            failOnEntitySpawn(player);
+            return false;
+        }
+        Vec3 pos = player.position();
+        entity.setPos(pos.x, pos.y + 0.2, pos.z);
+        level.addFreshEntity(entity);
+        this.isSuccess = true;
+        return true;
     }
 
     public Level getLevel() {
