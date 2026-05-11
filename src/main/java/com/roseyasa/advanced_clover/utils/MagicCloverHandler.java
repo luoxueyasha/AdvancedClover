@@ -4,10 +4,7 @@ import com.roseyasa.advanced_clover.item.MagicCloverItem;
 import com.roseyasa.advanced_clover.item.content.IngredientNamespceContent;
 import com.roseyasa.advanced_clover.registry.ComponentRegister;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -15,12 +12,8 @@ import net.neoforged.bus.api.Event;
 import net.neoforged.neoforge.common.NeoForge;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
-import static com.roseyasa.advanced_clover.registry.ComponentRegister.INGREDIENT_NAMESPACE;
 import static com.roseyasa.advanced_clover.registry.ItemRegister.ITEM_FOUR_LEAF_CLOVER;
-import static com.roseyasa.advanced_clover.registry.ItemRegister.ITEM_MAGIC_CLOVER;
-import static com.roseyasa.advanced_clover.registry.SoundRegister.SOUND_CLOVER_FAIL;
 import static com.roseyasa.advanced_clover.utils.MagicCloverConfig.WORKING_MODE;
 
 public class MagicCloverHandler {
@@ -124,10 +117,10 @@ public class MagicCloverHandler {
         return new ItemStack(randomItem);
     }
 
-    public static EntityType generateRandomMob(Level level, ItemStack cloverStack){
-        // @debug, 目前我们固定只返回一只creeper
-        //return EntityType.CREEPER;
-        return EntityType.ENDER_PEARL;
+    public static EntityType getRandomEntity(Level level, ItemStack cloverStack){
+        // @debug, 目前我们固定返回creeper
+        // 未来如果加入了匠craft（前提是日本人移植到26.1.2），那么这里预留一个联动
+        return EntityType.CREEPER;
     }
 
 

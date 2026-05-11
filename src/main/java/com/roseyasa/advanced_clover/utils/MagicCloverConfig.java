@@ -4,6 +4,8 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.util.List;
 
+import static com.roseyasa.advanced_clover.event.MagicCloverEvent.MAX_CHANCE;
+
 public class MagicCloverConfig {
 
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
@@ -74,7 +76,7 @@ public class MagicCloverConfig {
         MOB_SPAWN_CHANCE = BUILDER
             .comment("Chance to spawn mob when using clover. Range 0 ~ 1000, default value 10(1%).")
             .translation("config.advanced_clover.mob_spawn_chance")
-            .defineInRange("mobSpawnChance", 10, 0, 1000);
+            .defineInRange("mobSpawnChance", 10, 0, MAX_CHANCE);
 
         BUILDER.pop();
 

@@ -15,28 +15,25 @@ import net.minecraft.world.item.component.TooltipProvider;
 
 import java.util.function.Consumer;
 
-public record EntityTypeContent(String entity_type) implements TooltipProvider {
+public record EntityTypeContent(int chance, String entity_type) implements TooltipProvider {
     public static final EntityTypeContent DEFAULT = null;
 
     public static final Codec<EntityTypeContent> CODEC = RecordCodecBuilder.create((builder) -> {
         return builder.group(
+            Codec.INT.fieldOf("chance").forGetter(EntityTypeContent::chance),
             Codec.STRING.fieldOf("entity_type").orElse("minecraft:creeper").forGetter(EntityTypeContent::entity_type)
         ).apply(builder, EntityTypeContent::new);
     });
 
     public static final StreamCodec<ByteBuf, EntityTypeContent> STREAM_CODEC = StreamCodec.composite(
-        ByteBufCodecs.STRING_UTF8,
-        EntityTypeContent::entity_type,
+        ByteBufCodecs.INT,  EntityTypeContent::chance,
+        ByteBufCodecs.STRING_UTF8,  EntityTypeContent::entity_type,
         EntityTypeContent::new
     );
 
-    public EntityTypeContent withNamespace(String newNamespace) {
-        return new EntityTypeContent(newNamespace);
-    }
-
     @Override
     public void addToTooltip(Item.TooltipContext tooltipContext, Consumer<Component> consumer, TooltipFlag tooltipFlag, DataComponentGetter var4) {
-        if (this.entity_type == null || this.entity_type.equals("minecraft:creeper")) {
+        if (this.entity_type == null || this.entity_type.equals("minecraft:creeper") || this.chance < 0) {
             return;
         }
 

@@ -20,6 +20,8 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 import java.util.function.Consumer;
 
+import static com.roseyasa.advanced_clover.event.MagicCloverEvent.MAX_CHANCE;
+
 public class MagicCloverItem extends Item {
 
     private int cooldown = 10;
@@ -30,7 +32,7 @@ public class MagicCloverItem extends Item {
                 IngredientNamespceContent.DEFAULT
         ).component(
             ComponentRegister.ENTITY_TYPE,
-            new EntityTypeContent("minecraft:creeper")
+            new EntityTypeContent(-1,null)
         ));
     }
 
@@ -81,16 +83,21 @@ public class MagicCloverItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
         IngredientNamespceContent ingredientNamespceContent = stack.get(ComponentRegister.INGREDIENT_NAMESPACE);
-        if (ingredientNamespceContent == null) {
-            ingredientNamespceContent = new IngredientNamespceContent(null);
-        }
-        ingredientNamespceContent.addToTooltip(context,builder, tooltipFlag, stack);
 
         EntityTypeContent entityTypeContent = stack.get(ComponentRegister.ENTITY_TYPE);
         if (entityTypeContent == null) {
-            entityTypeContent = new EntityTypeContent(null);
+            entityTypeContent = new EntityTypeContent(-1,null);
         }
         entityTypeContent.addToTooltip(context,builder, tooltipFlag, stack);
+
+        // 如果自定义chance满的话，就不显示丢东西的namespace了
+        int chance = entityTypeContent.chance();
+        if(chance != MAX_CHANCE) {
+            if (ingredientNamespceContent == null) {
+                ingredientNamespceContent = new IngredientNamespceContent(null);
+            }
+            ingredientNamespceContent.addToTooltip(context, builder, tooltipFlag, stack);
+        }
     }
 
     @Override

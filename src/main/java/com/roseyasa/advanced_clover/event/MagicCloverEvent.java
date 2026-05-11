@@ -3,17 +3,26 @@ package com.roseyasa.advanced_clover.event;
 import com.roseyasa.advanced_clover.registry.ComponentRegister;
 import com.roseyasa.advanced_clover.utils.MagicCloverHandler;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.MappedRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrownEnderpearl;
+import net.minecraft.world.entity.vehicle.boat.Boat;
+import net.minecraft.world.entity.vehicle.minecart.Minecart;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -25,12 +34,14 @@ import static com.roseyasa.advanced_clover.Main.MODID;
 import static com.roseyasa.advanced_clover.registry.SoundRegister.SOUND_CLOVER_FAIL_ID;
 import static com.roseyasa.advanced_clover.utils.MagicCloverConfig.MOB_SPAWN_CHANCE;
 import static com.roseyasa.advanced_clover.utils.MagicCloverHandler.*;
+import static net.minecraft.world.item.Items.ENDER_PEARL;
 
 public class MagicCloverEvent extends Event implements ICancellableEvent {
     private final @Nullable Player player;
     private final Level level;
     private boolean isSuccess = false;
     private final ItemStack cloverStack;
+    public static final int MAX_CHANCE = 1000;
 
     public MagicCloverEvent(@Nullable Player player, Level level, ItemStack cloverStack){
         super();
@@ -45,49 +56,45 @@ public class MagicCloverEvent extends Event implements ICancellableEvent {
             this.isSuccess = false;
             return;
         }
-        // @debug, todo：创造模式下判断背包是否满。若满则抛射一个物品。
-        // 但是不知道那个版本开始，创造模式additem会忽略上限，我也不知道该怎么办了
-        // 暂时先只生成掉落物吧
-
-        //if (!player.hasInfiniteMaterials() && !player.addItem(randomStack)) {
 
         if(level.isClientSide()) {
             return;
         }
 
-        // @debug. todo：现在所有的mob处理都跑到这里了。备选方案1：仅过滤creeper，只有creeper适用chance；备选方案2：在ComponentRegister.ENTITY_TYPE 实现内部写个boolean值
+        // 如果设置了itemstack独立的chance且大于0，则不应用全局chance抽生物；只随机抽设置好的生物
+        int mob_chance = cloverStack.get(ComponentRegister.ENTITY_TYPE).chance();
         String mob_type = cloverStack.get(ComponentRegister.ENTITY_TYPE).entity_type();
-        if(mob_type != null) {
-            EntityType entityType = BuiltInRegistries.ENTITY_TYPE.getValue(Identifier.parse(mob_type));
-            boolean success = createRandomEntity(level, player, entityType);
-            if(!success){
-                failOnEntitySpawn(player);
-            }
-            return;
+        EntityType entityType;
 
+        if(mob_type != null ) {
+            Identifier identifier = Identifier.parse(mob_type);
+            entityType = BuiltInRegistries.ENTITY_TYPE.getOptional(identifier).orElse(null);
+        } else {
+            entityType = getRandomEntity(level, cloverStack);
         }
 
+        if(mob_chance < 0) {
+            // fallback到全局chance
+            mob_chance = MOB_SPAWN_CHANCE.get();
+        }
 
-        int mob_spawn_chance = MOB_SPAWN_CHANCE.get();
-        if(mob_spawn_chance == 1000 || mob_spawn_chance > level.getRandom().nextInt(1000)){
-            EntityType entitytype = generateRandomMob(level, cloverStack);
-            if(entitytype == null) {
-                failOnEntitySpawn(player);
+        if (mob_chance == MAX_CHANCE || mob_chance > level.getRandom().nextInt(MAX_CHANCE)) {
+            if (entityType == null) {
+                failOnExecute(player);
                 return;
             }
-            boolean success = createRandomEntity(level, player, entitytype);
-            if(!success){
-                failOnEntitySpawn(player);
+            boolean success = createRandomEntity(level, player, entityType);
+            if (!success) {
+                failOnExecute(player);
             }
             return;
         }
+
+        // 如果没抽到怪物，则做正常的生成物品
         ItemStack itemStack = MagicCloverHandler.generateRandomItem(level, cloverStack);
         if(itemStack == null){
-            this.isSuccess = false;
-            itemStack = RandomFallback();
-            ((ServerPlayer) player).connection.send(
-                new ClientboundCustomPayloadPacket(new SoundEffectPayload(SOUND_CLOVER_FAIL_ID))
-            );
+            failOnExecute(player);
+            return;
         } else {
             this.isSuccess = true;
         }
@@ -95,11 +102,14 @@ public class MagicCloverEvent extends Event implements ICancellableEvent {
 
     }
 
-    private void failOnEntitySpawn(Player player){
+    private void failOnExecute(Player player){
         this.isSuccess = false;
         ((ServerPlayer) player).connection.send(
             new ClientboundCustomPayloadPacket(new SoundEffectPayload(SOUND_CLOVER_FAIL_ID))
         );
+        ItemStack itemStack = RandomFallback();
+        player.drop(itemStack, false);
+
     }
 
     public record SoundEffectPayload(String id) implements CustomPacketPayload {
@@ -118,13 +128,37 @@ public class MagicCloverEvent extends Event implements ICancellableEvent {
     }
 
     private boolean createRandomEntity(Level level, Player player, EntityType entityType){
+
+        // 先判末影珍珠
+        if(entityType.equals(EntityType.ENDER_PEARL)) {
+            level.playSound((Entity) null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENDER_PEARL_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
+            ItemStack itemStack = new ItemStack(ENDER_PEARL);
+            Projectile.spawnProjectileFromRotation(ThrownEnderpearl::new, (ServerLevel) level, itemStack, player, 0.0F, 1.5F, 1.0F);
+        }
+
         Entity entity = entityType.create(level, EntitySpawnReason.SPAWN_ITEM_USE);
         if(entity == null){
-            failOnEntitySpawn(player);
+            failOnExecute(player);
+            return false;
+        }
+        if(player == null){
             return false;
         }
         Vec3 pos = player.position();
-        entity.setPos(pos.x, pos.y + 0.2, pos.z);
+
+        // 船/矿车放置在前方
+       if(entity instanceof Boat || entity instanceof Minecart){
+           float yaw = player.getYRot();
+           float pitch = player.getXRot();
+           Vec3 forward = Vec3.directionFromRotation(pitch, yaw).multiply(1.0, 0.0, 1.0).normalize();
+           double offsetX = forward.x * 1.1;
+           double offsetZ = forward.z * 1.1;
+           Vec3 spawnPos = new Vec3(pos.x + offsetX, pos.y, pos.z + offsetZ);
+           entity.setPos(spawnPos);
+           entity.setYRot(yaw);
+        } else {
+            entity.setPos(pos.x, pos.y + 0.2, pos.z);
+        }
         level.addFreshEntity(entity);
         this.isSuccess = true;
         return true;
