@@ -8,11 +8,14 @@
   "#comment.for_translators_4": "These lines started with `#comment` does not appear in-game, so you could skip these lines.",
 
   "block.advanced_clover.three_leaf_clover": "Clover",
+  "item.advanced_clover.three_leaf_clover": "Clover",
   "block.advanced_clover.four_leaf_clover": "Four-leaf Clover",
+  "item.advanced_clover.four_leaf_clover": "Four-leaf Clover",
   "item.advanced_clover.magic_clover": "Magic Clover",
   "tooltip.advanced_clover.random_source.vanilla": "Randomly throws a Minecraft item",
   "tooltip.advanced_clover.random_source.mod": "Randomly throws a(n) \"%s\" item",
   "tooltip.advanced_clover.random_source.none": "No random source",
+  "tooltip.advanced_clover.four_leaf_clover":  "Craft with other items to...",
   "tooltip.advanced_clover.entity_type.custom": "Has a feeling of \"%s\"...",
   "sound.advanced_clover.clover_fail": "Clover Failed",
 

@@ -41,7 +41,7 @@ public record IngredientNamespceContent(String namespace) implements TooltipProv
             consumer.accept(Component.translatable("tooltip." + Main.MODID + ".random_source.none").withStyle(ChatFormatting.RED));
             return;
         }
-        
+
         String key;
         if(this.namespace.equals("minecraft")) {
             key = "tooltip." + Main.MODID + ".random_source.vanilla";

@@ -23,9 +23,9 @@ public class CreativeTabBuilder {
             .title(Component.translatable("itemGroup."+Main.MODID+".name"))
             .icon(() -> ITEM_MAGIC_CLOVER.get().getDefaultInstance())
             .displayItems(((itemDisplayParameters, output) -> {
-                ItemStack magicCloverMinecraft = new ItemStack(ITEM_MAGIC_CLOVER.get());
-                magicCloverMinecraft.set(INGREDIENT_NAMESPACE.get(), new IngredientNamespceContent("minecraft") );
-                output.accept(magicCloverMinecraft);
+                ItemStack magic_clover_creative = new ItemStack(ITEM_MAGIC_CLOVER.get());
+                magic_clover_creative.set(INGREDIENT_NAMESPACE.get(), new IngredientNamespceContent("minecraft") );
+                output.accept(magic_clover_creative);
 
                 output.accept(ITEM_THREE_LEAF_CLOVER.get());
                 output.accept(ITEM_FOUR_LEAF_CLOVER.get());

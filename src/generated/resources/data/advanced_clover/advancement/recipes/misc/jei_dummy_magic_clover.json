@@ -13,31 +13,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "advanced_clover:four_leaf_clover"
+        "recipe": "advanced_clover:jei_dummy_magic_clover"
       },
       "trigger": "minecraft:recipe_unlocked"
-    },
-    "has_three_leaf_clover": {
-      "conditions": {
-        "items": [
-          {
-            "items": "advanced_clover:three_leaf_clover"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
     }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "has_three_leaf_clover",
       "has_four_leaf_clover"
     ]
   ],
   "rewards": {
     "recipes": [
-      "advanced_clover:four_leaf_clover"
+      "advanced_clover:jei_dummy_magic_clover"
     ]
   }
 }

@@ -9,12 +9,15 @@
   "#comment.for_translators_5": "我不太会文言，这段摸了",
 
   "block.advanced_clover.three_leaf_clover": "酢漿",
+  "item.advanced_clover.three_leaf_clover": "酢漿",
   "block.advanced_clover.four_leaf_clover": "四葉酢漿",
+  "item.advanced_clover.four_leaf_clover": "四葉酢漿",
   "item.advanced_clover.magic_clover": "神力四葉酢漿",
   "tooltip.advanced_clover.random_source.vanilla": "擲「礦藝」物一",
   "tooltip.advanced_clover.random_source.mod": "擲「%s」物一",
   "tooltip.advanced_clover.random_source.none": "無根",
   "tooltip.advanced_clover.entity_type.custom": "爻曰「%s」",
+  "tooltip.advanced_clover.four_leaf_clover":  "若與他物同製……",
   "sound.advanced_clover.clover_fail": "四葉酢漿：敗",
 
   "advanced_clover.configuration.mode_settings" : "工方",

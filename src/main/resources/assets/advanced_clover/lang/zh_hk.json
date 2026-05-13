@@ -8,12 +8,15 @@
   "#comment.for_translators_4": "這些帶#comment的文字不會出現在遊戲裏，所以可以不翻譯，飲茶先啦。",
 
   "block.advanced_clover.three_leaf_clover": "三葉草",
+  "item.advanced_clover.three_leaf_clover": "三葉草",
   "block.advanced_clover.four_leaf_clover": "四葉草",
+  "item.advanced_clover.four_leaf_clover": "四葉草",
   "item.advanced_clover.magic_clover": "魔法四葉草",
   "tooltip.advanced_clover.random_source.vanilla": "隨機擲出一件Minecraft原版物品",
   "tooltip.advanced_clover.random_source.mod": "隨機擲出一件「%s」物品",
   "tooltip.advanced_clover.random_source.none": "無隨機源",
   "tooltip.advanced_clover.entity_type.custom": "有一種“%s”的預感……",
+  "tooltip.advanced_clover.four_leaf_clover": "和其他物品合成的話……",
   "sound.advanced_clover.clover_fail": "四葉草：失敗",
 
   "advanced_clover.configuration.mode_settings" : "工作模式設置",

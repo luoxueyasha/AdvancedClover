@@ -1,6 +1,7 @@
 package com.roseyasa.advanced_clover.registry;
 
 import com.roseyasa.advanced_clover.Main;
+import com.roseyasa.advanced_clover.item.CloverItem;
 import com.roseyasa.advanced_clover.item.MagicCloverItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -23,7 +24,8 @@ public class ItemRegister {
     // BlockItems with no BlockEntity
     public static final DeferredHolder<Item, BlockItem> ITEM_THREE_LEAF_CLOVER;
     public static final String ITEM_THREE_LEAF_CLOVER_ID = "three_leaf_clover";
-    public static final DeferredHolder<Item, BlockItem> ITEM_FOUR_LEAF_CLOVER;
+    // public static final DeferredHolder<CloverItem, BlockItem> ITEM_FOUR_LEAF_CLOVER;
+    public static final DeferredHolder<Item, CloverItem> ITEM_FOUR_LEAF_CLOVER;
     public static final String ITEM_FOUR_LEAF_CLOVER_ID = "four_leaf_clover";
 
 
@@ -34,7 +36,7 @@ public class ItemRegister {
         ITEM_THREE_LEAF_CLOVER =
             ItemRegister.ITEMS.registerSimpleBlockItem(ITEM_THREE_LEAF_CLOVER_ID, BLOCK_THREE_LEAF_CLOVER);
         ITEM_FOUR_LEAF_CLOVER =
-            ItemRegister.ITEMS.registerSimpleBlockItem(ITEM_FOUR_LEAF_CLOVER_ID, BLOCK_FOUR_LEAF_CLOVER);
+            ItemRegister.ITEMS.register( ITEM_FOUR_LEAF_CLOVER_ID, () -> new CloverItem(BLOCK_FOUR_LEAF_CLOVER.get(), new Item.Properties().setId(createItemKey(ITEM_FOUR_LEAF_CLOVER_ID))));
     }
 
 }

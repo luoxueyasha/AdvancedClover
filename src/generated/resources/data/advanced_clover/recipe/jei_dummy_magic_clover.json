@@ -3,11 +3,9 @@
   "category": "misc",
   "ingredients": [
     "advanced_clover:four_leaf_clover",
-    "advanced_clover:four_leaf_clover",
-    "advanced_clover:four_leaf_clover"
+    "minecraft:structure_void"
   ],
   "result": {
-    "count": 4,
-    "id": "advanced_clover:three_leaf_clover"
+    "id": "advanced_clover:magic_clover"
   }
 }
