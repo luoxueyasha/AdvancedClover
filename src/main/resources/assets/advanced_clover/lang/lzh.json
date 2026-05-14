@@ -17,7 +17,11 @@
   "tooltip.advanced_clover.random_source.mod": "擲「%s」物一",
   "tooltip.advanced_clover.random_source.none": "無根",
   "tooltip.advanced_clover.entity_type.custom": "爻曰「%s」",
-  "tooltip.advanced_clover.four_leaf_clover":  "若與他物同製……",
+  "tooltip.advanced_clover.four_leaf_clover":  "若同他物製……",
+  "tooltip.advanced_clover.custom_item_list.1": "將擲：",
+  "tooltip.advanced_clover.custom_item_list.comma": ", ",
+  "tooltip.advanced_clover.custom_item_list.2": "……等",
+  "tooltip.advanced_clover.custom_item_list.3": "%d物之一",
   "sound.advanced_clover.clover_fail": "四葉酢漿：敗",
 
   "advanced_clover.configuration.mode_settings" : "工方",

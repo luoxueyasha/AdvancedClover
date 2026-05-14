@@ -1,6 +1,7 @@
 package com.roseyasa.advanced_clover.utils;
 
 import com.roseyasa.advanced_clover.item.MagicCloverItem;
+import com.roseyasa.advanced_clover.item.content.CustomItemListContext;
 import com.roseyasa.advanced_clover.item.content.IngredientNamespceContent;
 import com.roseyasa.advanced_clover.registry.ComponentRegister;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -80,6 +81,20 @@ public class MagicCloverHandler {
                 });
             });
         }
+
+        // 更新绑定于itemstack的custom_item_list
+        private static List<Item> updateCustomItemList(List<String> ilist) {
+            List<Item> result = new ArrayList<>();
+            for (Map.Entry<String, List<Item>> entry : ALL_ITEMS.entrySet()) {
+                for (Item item : entry.getValue()) {
+                    String itemId = BuiltInRegistries.ITEM.getKey(item).toString();
+                    if (ilist.contains(itemId)) {
+                        result.add(item);
+                    }
+                }
+            }
+            return result;
+        }
     }
 
     public static ItemStack generateRandomItem(Level level, ItemStack cloverStack) {
@@ -87,8 +102,18 @@ public class MagicCloverHandler {
             updateItemsList();
         }
 
-        IngredientNamespceContent content = cloverStack.get(ComponentRegister.INGREDIENT_NAMESPACE);
-        if (content == null || content.namespace() == null) {
+         // 如果有默认itemlist，则忽略默认namespace和黑白名单，直接抽自己的玩意
+        CustomItemListContext customItemListContext = cloverStack.get(ComponentRegister.CUSTOM_ITEM_LIST);
+        if(customItemListContext != null){
+            List<Item> itemList = UpdateItemsListEvent.updateCustomItemList(customItemListContext.ilist());
+            if(!itemList.isEmpty()){
+                Item randomItem = itemList.get(level.getRandom().nextInt(itemList.size()));
+                return new ItemStack(randomItem);
+            }
+        }
+
+        IngredientNamespceContent inContent = cloverStack.get(ComponentRegister.INGREDIENT_NAMESPACE);
+        if (inContent == null || inContent.namespace() == null) {
             // 如果namespace为空，获取任意物品（只能通过编辑component实现）
             List<List<Item>> nonEmptyLists = ALL_ITEMS.values().stream()
                 .filter(list -> list != null && !list.isEmpty())
@@ -107,7 +132,7 @@ public class MagicCloverHandler {
 
         }
 
-        List<Item> itemList = NAMESPACE_ITEMS.get(content.namespace());
+        List<Item> itemList = NAMESPACE_ITEMS.get(inContent.namespace());
         if (itemList == null || itemList.isEmpty()) {
             return null;
         }

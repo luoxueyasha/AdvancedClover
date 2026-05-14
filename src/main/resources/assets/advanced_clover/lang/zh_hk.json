@@ -17,6 +17,10 @@
   "tooltip.advanced_clover.random_source.none": "無隨機源",
   "tooltip.advanced_clover.entity_type.custom": "有一種“%s”的預感……",
   "tooltip.advanced_clover.four_leaf_clover": "和其他物品合成的話……",
+  "tooltip.advanced_clover.custom_item_list.1": "會擲出：",
+  "tooltip.advanced_clover.custom_item_list.comma": ", ",
+  "tooltip.advanced_clover.custom_item_list.2": "……等",
+  "tooltip.advanced_clover.custom_item_list.3": "%d件物品之一",
   "sound.advanced_clover.clover_fail": "四葉草：失敗",
 
   "advanced_clover.configuration.mode_settings" : "工作模式設置",

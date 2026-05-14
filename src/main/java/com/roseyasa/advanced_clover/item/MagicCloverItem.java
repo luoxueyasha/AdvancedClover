@@ -1,6 +1,7 @@
 package com.roseyasa.advanced_clover.item;
 
 import com.roseyasa.advanced_clover.event.MagicCloverEvent;
+import com.roseyasa.advanced_clover.item.content.CustomItemListContext;
 import com.roseyasa.advanced_clover.item.content.IngredientNamespceContent;
 import com.roseyasa.advanced_clover.item.content.EntityTypeContent;
 import com.roseyasa.advanced_clover.registry.ComponentRegister;
@@ -18,6 +19,7 @@ import net.neoforged.neoforge.common.NeoForge;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.function.Consumer;
 
 import static com.roseyasa.advanced_clover.event.MagicCloverEvent.MAX_CHANCE;
@@ -33,6 +35,9 @@ public class MagicCloverItem extends Item {
         ).component(
             ComponentRegister.ENTITY_TYPE,
             new EntityTypeContent(-1,null)
+        ).component(
+            ComponentRegister.CUSTOM_ITEM_LIST,
+            CustomItemListContext.DEFAULT
         ));
     }
 
@@ -84,20 +89,32 @@ public class MagicCloverItem extends Item {
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
         IngredientNamespceContent ingredientNamespceContent = stack.get(ComponentRegister.INGREDIENT_NAMESPACE);
 
+        // 自定义list和自定义生物可以同时存在
+        CustomItemListContext customItemListContext = stack.get(ComponentRegister.CUSTOM_ITEM_LIST);
+        boolean isItemListExist = true;
+        if(customItemListContext == null || customItemListContext.ilist().isEmpty()){
+            isItemListExist = false;
+        } else{
+            customItemListContext.addToTooltip(context,builder,tooltipFlag,stack);
+        }
+
         EntityTypeContent entityTypeContent = stack.get(ComponentRegister.ENTITY_TYPE);
         if (entityTypeContent == null) {
             entityTypeContent = new EntityTypeContent(-1,null);
         }
         entityTypeContent.addToTooltip(context,builder, tooltipFlag, stack);
 
-        // 如果自定义chance满的话，就不显示丢东西的namespace了
+        // 如果自定义生物chance满的话，就不显示丢东西的namespace了
+        // 如果有自己的list，也不处理默认的黑白名单，转为自己的白名单
         int chance = entityTypeContent.chance();
-        if(chance != MAX_CHANCE) {
-            if (ingredientNamespceContent == null) {
-                ingredientNamespceContent = new IngredientNamespceContent(null);
-            }
-            ingredientNamespceContent.addToTooltip(context, builder, tooltipFlag, stack);
+        if(isItemListExist || chance == MAX_CHANCE) {
+            return;
         }
+        if (ingredientNamespceContent == null) {
+            ingredientNamespceContent = new IngredientNamespceContent(null);
+        }
+        ingredientNamespceContent.addToTooltip(context, builder, tooltipFlag, stack);
+
     }
 
     @Override

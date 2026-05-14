@@ -1,6 +1,7 @@
 package com.roseyasa.advanced_clover.registry;
 
 import com.roseyasa.advanced_clover.Main;
+import com.roseyasa.advanced_clover.item.content.CustomItemListContext;
 import com.roseyasa.advanced_clover.item.content.IngredientNamespceContent;
 import com.roseyasa.advanced_clover.item.content.EntityTypeContent;
 import net.minecraft.core.component.DataComponentType;
@@ -30,6 +31,16 @@ public class ComponentRegister {
             () -> DataComponentType.<EntityTypeContent>builder()
                 .persistent(EntityTypeContent.CODEC)
                 .networkSynchronized(EntityTypeContent.STREAM_CODEC)
+                .cacheEncoding()
+                .build()
+        );
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<CustomItemListContext>> CUSTOM_ITEM_LIST =
+        DATA_COMPONENT_TYPES.register(
+            "item_list",
+            () -> DataComponentType.<CustomItemListContext>builder()
+                .persistent(CustomItemListContext.CODEC)
+                .networkSynchronized(CustomItemListContext.STREAM_CODEC)
                 .cacheEncoding()
                 .build()
         );
