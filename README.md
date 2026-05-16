@@ -6,30 +6,36 @@ Refine from the old [Magic Clover](https://www.minecraftforum.net/forums/mapping
 
 Participant in [TeaCon2026](https://www.teacon.cn/2026).
 
+Usage
+====
+The `Magic Clover` item accepts the following components:
 
-<!--
-Installation information
-=======
+```
+advanced_clover:magic_clover[
 
-This template repository can be directly cloned to get you started with a new
-mod. Simply create a new repository cloned from this one, by following the
-instructions provided by [GitHub](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
+    advanced_clover:ingredient_namespace={
+        namespace:"ae2"
+    },
+    
+    advanced_clover:entity_type={
+        chance:300,
+        entity_type:"minecraft:ender_pearl"
+    },
+    advanced_clover:item_list={
+        item_list:["minecraft:stone","minecraft:dirt","minecraft:diamond","minecraft:iron_ingot"]
+    }
+]
+```
+* `ingredient_namespace.namespace` – Accepts a string representing the mod ID of the ingredient used to craft the Magic Clover. This component acts as the random pool index.  
+If null, the clover will randomly throw any item, ignoring any whitelist/blacklist in config.
 
-Once you have your clone, simply open the repository in the IDE of your choice. The usual recommendation for an IDE is either IntelliJ IDEA or Eclipse.
 
-If at any point you are missing libraries in your IDE, or you've run into problems you can
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-{this does not affect your code} and then start the process again.
+* `entity_type` – Determines which entity will be summoned by the Magic Clover. Default is null, which falls back to the configuration files (where the default is `minecraft:creeper` with a `10 (1%)` chance).
+  * `entity_type.chance` – Accepts an integer from 0 to 1000. The value is divided by 10 to get the percentage chance that the item summons an entity.
+  Example: `100` = `10%` chance.
+  * `entity_type.entity_type` – Accepts a string that should be the ID of the summoned entity.
 
-Mapping Names:
-============
-By default, the MDK is configured to use the official mapping names from Mojang for methods and fields 
-in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
-license. For the latest license text, refer to the mapping file itself, or the reference copy here:
-https://github.com/NeoForged/NeoForm/blob/main/Mojang.md
 
-Additional Resources: 
-==========
-Community Documentation: https://docs.neoforged.net/  
-NeoForged Discord: https://discord.neoforged.net/
--->
+* `item_list.item_list` – Accepts a list of strings (List\<String\>). This overrides the whitelist/blacklist from the configuration and serves as the item’s own unique whitelist.
+Default is null.  
+If not null and more than one string has a valid correspounding item, it ignores `ingredient_namespace.namespace`. 
