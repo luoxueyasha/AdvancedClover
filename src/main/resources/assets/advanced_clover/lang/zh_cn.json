@@ -5,7 +5,7 @@
   "#comment.for_translators_1": "`三叶草`泛指植物学车轴草族（tribe Trifolieae）下的所有物种，包括但不限于苜蓿属（Medicago）以及三叶草属（Trifolium）等。",
   "#comment.for_translators_2": "如果你的语言里对于这些具体的物种有区分的话，就找一个最能概括描述这些植物的称呼。",
   "#comment.for_translators_3": "参：https://en.wikipedia.org/wiki/Trifolieae",
-  "#comment.for_translators_4": "这些带#comment的文字不会出现在游戏里，所以可以不翻译。",
+  "#comment.for_translators_4": "这些带#comment的文字不会出现在游戏里，所以可以不翻译。摸了。",
 
   "block.advanced_clover.three_leaf_clover": "三叶草",
   "item.advanced_clover.three_leaf_clover": "三叶草",
@@ -31,7 +31,7 @@
   "config.advanced_clover.mob_spawn_chance": "怪物生成概率",
   "advanced_clover.configuration.title": "进阶四叶草",
   "advanced_clover.configuration.mode_settings.tooltip": "设置魔法四叶草的工作模式相关内容。",
-  "config.advanced_clover.working_mode.tooltip": "魔法四叶草的工作模式（黑/白名单）。值接受“whitelist”或“blacklist”。",
+  "config.advanced_clover.working_mode.tooltip": "魔法四叶草的工作模式（黑/白名单）。只接受“whitelist”或“blacklist”。",
   "config.advanced_clover.blacklist_items.tooltip": "如果工作模式为“blacklist”，则不会出现与其中id相匹配的物品。接受通配符'*'。",
   "config.advanced_clover.whitelist_items.tooltip": "如果工作模式为“whitelist”，则仅会出现与其中id相匹配的物品。接受通配符'*'。"
 

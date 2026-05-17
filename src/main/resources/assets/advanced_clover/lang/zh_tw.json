@@ -15,7 +15,7 @@
   "tooltip.advanced_clover.random_source.vanilla": "隨機擲出一件Minecraft原版物品",
   "tooltip.advanced_clover.random_source.mod": "隨機擲出一件「%s」物品",
   "tooltip.advanced_clover.random_source.none": "無隨機來源",
-  "tooltip.advanced_clover.entity_type.custom": "有一種“%s”的預感……",
+  "tooltip.advanced_clover.entity_type.custom": "有一種「%s」的預感……",
   "tooltip.advanced_clover.four_leaf_clover": "和其他物品合成的話……",
   "tooltip.advanced_clover.custom_item_list.1": "會擲出：",
   "tooltip.advanced_clover.custom_item_list.comma": ", ",
