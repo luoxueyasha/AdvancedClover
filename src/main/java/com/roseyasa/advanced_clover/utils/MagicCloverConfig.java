@@ -25,7 +25,7 @@ public class MagicCloverConfig {
                 "'whitelist', 'blacklist'.",
                 "Default: 'blacklist'")
             .translation("config.advanced_clover.working_mode")
-            .define("Working Mode", "blacklist",
+            .define("Working Mode", "whitelist",
                 value -> "whitelist".equals(value) || "blacklist".equals(value));
 
         BLACKLIST_ITEMS = BUILDER
@@ -65,10 +65,132 @@ public class MagicCloverConfig {
             .translation("config.advanced_clover.whitelist_items")
             .defineListAllowEmpty("Whitelist Items",
                 List.of(
-                    "minecraft:diamond",
-                    "aqua*:neptune*",
-                    "minecraft:dirt*",
-                    "minecraft:*wood*"
+                    "minecraft:*diamond*",
+                    "minecraft:*dirt*",
+                    "minecraft:*wool*",
+                    "minecraft:*glass*",
+                    "minecraft:*iron*",
+                    "minecraft:*gold*",
+                    "minecraft:*grass*",
+                    "minecraft:*lapis*",
+                    "minecraft:*copper*",
+                    "minecraft:*redstone*",
+                    "minecraft:*seed*",
+                    "minecraft:*bundle*",
+                    "minecraft:*boat*",
+                    "minecraft:minecart",
+                    "minecraft:*birch*",
+                    "minecraft:*oak*",
+                    "minecraft:*jungle*",
+                    "minecraft:*acacia*",
+                    "minecraft:*mangrove*",
+                    "minecraft:*cherry*",
+                    "minecraft:*cobble*",
+                    "minecraft:*bamboo*",
+                    "minecraft:*apple*",
+                    "minecraft:*diorite*",
+                    "minecraft:*deepslate*",
+                    "minecraft:*granite*",
+                    "minecraft:*tuff*",
+                    "minecraft:*sand*",
+                    "minecraft:*obsidian*",
+                    "minecraft:*prismarin*",
+                    "minecraft:*nether*",
+                    "minecraft:*end*",
+                    "minecraft:*purpur*",
+                    "minecraft:*cake*",
+                    "minecraft:*fish*",
+                    "minecraft:*berries*",
+                    "minecraft:*cooked*",
+                    "minecraft:bread",
+                    "minecraft:*undying",
+                    "minecraft:*armor",
+                    "minecraft:*potato*",
+                    "minecraft:*carrot*",
+                    "minecraft:heart_of_the_sea",
+                    "minecraft:*_dye",
+                    "minecraft:*dandelion*",
+
+                    "*_banner_pattern",
+                    "*_pottery_sherd",
+                    "*_smithing_template",
+
+                    "bakeries:*powder*",
+                    "bakeries:*flour*",
+                    "bakeries:*toast*",
+                    "bakeries:*yolk*",
+                    "bakeries:*bread*",
+                    "bakeries:*dough*",
+
+                    "bsf3lite:*snow*",
+                    "bsf3lite:*glove*",
+
+                    "modulargolems:*golem*",
+
+                    "advanced_clover:*_leaf_clover",
+
+                    "harvestheritage:*_stand_block",
+                    "harvestheritage:grass_shear",
+                    "harvestheritage:magnifying_glass",
+
+                    "mekanism:*dust_*",
+                    "mekanism:*_scrap",
+                    "mekanism:pellet*",
+                    "mekanism:enriched*",
+                    "mekanism:*circuit*",
+                    "mekanism:alloy*",
+                    "mekanism:nugget_*",
+                    "mekanism:raw_*",
+                    "mekanism:ingot_*",
+                    "mekanism:*_installer",
+                    "mekanism:hazmat_*",
+
+                    "meka*:*_helmet",
+                    "meka*:*_chestplate",
+                    "meka*:*_leggings",
+                    "meka*:*_boots",
+                    "meka*:*_shield",
+                    "meka*:*_sword",
+                    "meka*:*reactor*",
+                    "mekmm:*factory*",
+
+                    "super_lead:super_lead",
+
+                    "eclipticseasons:pinwheel*",
+                    "eclipticseasons:*chimes",
+                    "eclipticseasons:*wand",
+
+                    "shadowsandpetals:*chair*",
+                    "shadowsandpetals:*sakura*",
+                    "shadowsandpetals:*maple*",
+                    "shadowsandpetals:*ginkgo*",
+                    "shadowsandpetals:*autumn*",
+                    "shadowsandpetals:*aluminum*",
+
+                    "programmable_magic:*alloy_wand",
+                    "programmable_magic:*plugin*",
+                    "programmable_magic:spell_display*",
+
+                    "letter_signal_phone:*phone*",
+                    "letter_signal_phone:*telegram*",
+                    "letter_signal_phone:stamp_pack",
+
+                    "nestle:nestle_lead",
+
+                    "shakenstir:shaker",
+                    "shakenstir:ice*",
+                    "shakenstir:lemon*",
+                    "shakenstir:*tea*",
+                    "shakenstir:vodka",
+                    "shakenstir:rum",
+                    "shakenstir:whisky",
+                    "shakenstir:gin",
+                    "shakenstir:brandy",
+                    "shakenstir:tequ*",
+                    "shakenstir:*glassware",
+
+                    "terraria_boulders:*boulder*"
+
                 ),
                 () -> "",
                 s -> s instanceof String);
@@ -85,3 +207,5 @@ public class MagicCloverConfig {
 
     public static final ModConfigSpec SPEC = BUILDER.build();
 }
+
+
