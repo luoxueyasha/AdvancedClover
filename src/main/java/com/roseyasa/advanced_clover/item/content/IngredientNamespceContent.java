@@ -21,6 +21,7 @@ public record IngredientNamespceContent(String namespace) implements TooltipProv
 
     public static final Codec<IngredientNamespceContent> CODEC = RecordCodecBuilder.create((builder) -> {
         return builder.group(
+            // Codec.STRING.fieldOf("namespace").orElse("minecraft").forGetter(IngredientNamespceContent::namespace) 
             Codec.STRING.fieldOf("namespace").orElse("minecraft").forGetter(IngredientNamespceContent::namespace)
         ).apply(builder, IngredientNamespceContent::new);
     });
