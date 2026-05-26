@@ -31,7 +31,8 @@ public class MagicCloverConfig {
         BLACKLIST_ITEMS = BUILDER
             .comment("Items in Magic Clover blacklist. These items will not be spawned if mod is working on blacklist mode.",
                 "Supports regex.")
-            .defineListAllowEmpty("Blacklist Items",
+            .translation("config.advanced_clover.blacklist_items")
+            .defineListAllowEmpty("blacklist_items",
                 List.of(
                     "minecraft:air",
                     "minecraft:bedrock",
@@ -59,7 +60,7 @@ public class MagicCloverConfig {
             .comment("Items in Magic Clover whitelist. These items will only be spawned if mod is working on whitelist mode.",
                 "Supports regex.")
             .translation("config.advanced_clover.whitelist_items")
-            .defineListAllowEmpty("Whitelist Items",
+            .defineListAllowEmpty("whitelist_items",
                 List.of(
                     "minecraft:(?!.*spawn_egg).*(copper|iron|gold|diamond|redstone|lapis|emerald|netherite).*",
                     "minecraft:(?!.*spawn_egg).*(dirt|wool|glass|grass|seed|bundle|boat|wood|birch|oak|jungle|acacia|mangrove|cherry|cobble|bamboo).*",

@@ -3,7 +3,7 @@ package com.roseyasa.advanced_clover.item;
 import com.roseyasa.advanced_clover.event.MagicCloverEvent;
 import com.roseyasa.advanced_clover.item.content.CustomItemListContext;
 import com.roseyasa.advanced_clover.item.content.IngredientNamespceContent;
-import com.roseyasa.advanced_clover.item.content.EntityTypeContent;
+import com.roseyasa.advanced_clover.item.content.EntityListContent;
 import com.roseyasa.advanced_clover.registry.ComponentRegister;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -19,7 +19,6 @@ import net.neoforged.neoforge.common.NeoForge;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.function.Consumer;
 
 import static com.roseyasa.advanced_clover.event.MagicCloverEvent.MAX_CHANCE;
@@ -34,7 +33,7 @@ public class MagicCloverItem extends Item {
                 IngredientNamespceContent.DEFAULT
         ).component(
             ComponentRegister.ENTITY_TYPE,
-            new EntityTypeContent(-1,null)
+            new EntityListContent(-1,null)
         ).component(
             ComponentRegister.CUSTOM_ITEM_LIST,
             CustomItemListContext.DEFAULT
@@ -98,9 +97,9 @@ public class MagicCloverItem extends Item {
             customItemListContext.addToTooltip(context,builder,tooltipFlag,stack);
         }
 
-        EntityTypeContent entityTypeContent = stack.get(ComponentRegister.ENTITY_TYPE);
+        EntityListContent entityTypeContent = stack.get(ComponentRegister.ENTITY_TYPE);
         if (entityTypeContent == null) {
-            entityTypeContent = new EntityTypeContent(-1,null);
+            entityTypeContent = new EntityListContent(-1,null);
         }
         entityTypeContent.addToTooltip(context,builder, tooltipFlag, stack);
 

@@ -3,8 +3,6 @@ package com.roseyasa.advanced_clover.event;
 import com.roseyasa.advanced_clover.registry.ComponentRegister;
 import com.roseyasa.advanced_clover.utils.MagicCloverHandler;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.MappedRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -29,6 +27,8 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.ICancellableEvent;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 import static com.roseyasa.advanced_clover.Main.MODID;
 import static com.roseyasa.advanced_clover.registry.SoundRegister.SOUND_CLOVER_FAIL_ID;
@@ -60,14 +60,16 @@ public class MagicCloverEvent extends Event implements ICancellableEvent {
         if(level.isClientSide()) {
             return;
         }
+        // @debug, todo: 对物品和生物的component解析（或许不用解析，直接套上去）
 
         // 如果设置了itemstack独立的chance且大于0，则不应用全局chance抽生物；只随机抽设置好的生物
         int mob_chance = cloverStack.get(ComponentRegister.ENTITY_TYPE).chance();
-        String mob_type = cloverStack.get(ComponentRegister.ENTITY_TYPE).entity_type();
+        List<String> mob_type_list = cloverStack.get(ComponentRegister.ENTITY_TYPE).entity_list();
         EntityType entityType;
 
-        if(mob_type != null ) {
-            Identifier identifier = Identifier.parse(mob_type);
+        if(mob_type_list != null ) {
+            String selected_mob = mob_type_list.get(level.getRandom().nextInt(mob_type_list.size()));
+            Identifier identifier = Identifier.parse(selected_mob);
             entityType = BuiltInRegistries.ENTITY_TYPE.getOptional(identifier).orElse(null);
         } else {
             entityType = getRandomEntity(level, cloverStack);
