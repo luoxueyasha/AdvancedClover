@@ -17,9 +17,9 @@ advanced_clover:magic_clover[
         namespace:"ae2"
     },
     
-    advanced_clover:entity_type={
+    advanced_clover:entity_list={
         chance:300,
-        entity_type:"minecraft:ender_pearl"
+        entity_list:"minecraft:ender_pearl"
     },
     advanced_clover:item_list={
         item_list:["minecraft:stone","minecraft:dirt","minecraft:diamond","minecraft:iron_ingot"]
@@ -30,10 +30,10 @@ advanced_clover:magic_clover[
 If null, the clover will randomly throw any item, ignoring any whitelist/blacklist in config.
 
 
-* `entity_type` – Determines which entity will be summoned by the Magic Clover. Default is null, which falls back to the configuration files (where the default is `minecraft:creeper` with a `10 (1%)` chance).
-  * `entity_type.chance` – Accepts an integer from 0 to 1000. The value is divided by 10 to get the percentage chance that the item summons an entity.
+* `entity_list` – Determines which entity(s) will be summoned by the Magic Clover. Default is null, which falls back to the configuration files (where the default is `[minecraft:creeper]` with a `10 (1%)` chance).
+  * `entity_list.chance` – Accepts an integer from 0 to 1000. The value is divided by 10 to get the percentage chance that the item summons an entity.
   Example: `100` = `10%` chance.
-  * `entity_type.entity_type` – Accepts a string that should be the ID of the summoned entity.
+  * `entity_type.entity_type` – Accepts a list of strings(List\<String\>). This should be the ID of the possible summoned entities.
 
 
 * `item_list.item_list` – Accepts a list of strings (List\<String\>). This overrides the whitelist/blacklist from the configuration and serves as the item’s own unique whitelist.
