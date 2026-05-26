@@ -13,14 +13,18 @@ import net.neoforged.bus.api.Event;
 import net.neoforged.neoforge.common.NeoForge;
 
 import java.util.*;
+import java.util.regex.Pattern;
 
 import static com.roseyasa.advanced_clover.registry.ItemRegister.ITEM_FOUR_LEAF_CLOVER;
+import static com.roseyasa.advanced_clover.utils.MagicCloverConfig.WHITELIST_ITEMS;
 import static com.roseyasa.advanced_clover.utils.MagicCloverConfig.WORKING_MODE;
 
 public class MagicCloverHandler {
     private static final Map<String, List<Item>> NAMESPACE_ITEMS = new HashMap<>();
     private static final List<String> LISTED_ITEMS = new ArrayList<String>();
     private static Map<String, List<Item>> ALL_ITEMS = new HashMap<>();
+    private static final List<Pattern> BLACKLIST_PATTERNS = new ArrayList<>();
+    private static final List<Pattern> WHITELIST_PATTERNS = new ArrayList<>();
 
     public static void updateItemsList() {
         Event event = new UpdateItemsListEvent();
@@ -56,33 +60,36 @@ public class MagicCloverHandler {
 
         private static void updateBlackList(){
             // 更新黑名单
-            LISTED_ITEMS.addAll(MagicCloverConfig.BLACKLIST_ITEMS.get());
+            BLACKLIST_PATTERNS.clear();
+            for (String patternStr : MagicCloverConfig.BLACKLIST_ITEMS.get()) {
+                BLACKLIST_PATTERNS.add(Pattern.compile(patternStr));
+            }
 
             NAMESPACE_ITEMS.forEach((namespace, items) -> {
                 items.removeIf(item -> {
                     String itemId = BuiltInRegistries.ITEM.getKey(item).toString();
-                    return LISTED_ITEMS.stream().anyMatch(pattern ->
-                        itemId.matches(pattern.replace("*", ".*"))
-                    );
+                    return BLACKLIST_PATTERNS.stream().anyMatch(p -> p.matcher(itemId).matches());
                 });
             });
         }
 
         private static void updateWhiteList(){
             // 更新白名单
-            LISTED_ITEMS.addAll(MagicCloverConfig.WHITELIST_ITEMS.get());
+            WHITELIST_PATTERNS.clear();
+            for (String patternStr : WHITELIST_ITEMS.get()) {
+                WHITELIST_PATTERNS.add(Pattern.compile(patternStr));
+            }
 
             NAMESPACE_ITEMS.forEach((namespace, items) -> {
                 items.removeIf(item -> {
                     String itemId = BuiltInRegistries.ITEM.getKey(item).toString();
-                    return LISTED_ITEMS.stream().noneMatch(pattern ->
-                        itemId.matches(pattern.replace("*", ".*"))
-                    );
+                    return WHITELIST_PATTERNS.stream().noneMatch(p -> p.matcher(itemId).matches());
                 });
             });
         }
 
         // 更新绑定于itemstack的custom_item_list
+        // @debug,暂时不支持正则。获取数量会比较头疼
         private static List<Item> updateCustomItemList(List<String> ilist) {
             List<Item> result = new ArrayList<>();
             for (Map.Entry<String, List<Item>> entry : ALL_ITEMS.entrySet()) {
