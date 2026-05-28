@@ -1,9 +1,12 @@
 package com.roseyasa.advanced_clover.event;
 
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.roseyasa.advanced_clover.registry.ComponentRegister;
 import com.roseyasa.advanced_clover.utils.MagicCloverHandler;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.TagParser;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
@@ -29,6 +32,8 @@ import net.neoforged.bus.api.ICancellableEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.roseyasa.advanced_clover.Main.MODID;
 import static com.roseyasa.advanced_clover.registry.SoundRegister.SOUND_CLOVER_FAIL_ID;
@@ -126,6 +131,26 @@ public class MagicCloverEvent extends Event implements ICancellableEvent {
         @Override
         public Type<? extends CustomPacketPayload> type() {
             return TYPE;
+        }
+    }
+
+    private static final Pattern MOB_STRING_PATTERN = Pattern.compile("^([a-zA-Z0-9_.:]+)(\\{.*\\})?$");
+
+    public static EntityType<?> parseEntityType(String input) {
+        Matcher m = MOB_STRING_PATTERN.matcher(input);
+        if (!m.matches()) return null;
+        String idStr = m.group(1);
+        return BuiltInRegistries.ENTITY_TYPE.getOptional(Identifier.tryParse(idStr)).orElse(null);
+    }
+
+    public static CompoundTag parseNbtFromString(String input) {
+        int braceStart = input.indexOf('{');
+        if (braceStart == -1) return null;
+        String nbtPart = input.substring(braceStart);
+        try {
+            return TagParser.parseCompoundFully(nbtPart);
+        } catch (CommandSyntaxException e) {
+            return null;
         }
     }
 
