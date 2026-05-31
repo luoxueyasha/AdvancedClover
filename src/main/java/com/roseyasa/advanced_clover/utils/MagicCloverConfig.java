@@ -72,11 +72,12 @@ public class MagicCloverConfig {
 
                     ".*_(banner_pattern|pottery_sherd|smithing_template)",
 
-                    "bakeries:.*(powder|flour|toast|yolk|bread|dough).*",
+                    "bakeries:.*(powder|flour|toast|yolk|bread|dough|coffee|latte|raw_|egg|tomato|taro|olive|crosian|apple|roll|butter|).*",
 
-                    "bsf3lite:.*(snow|glove).*",
+                    "bsf3lite:.*(snow|glove|skates|boots|core|vodka).*",
 
                     "modulargolems:(?!.*spawn_egg).*golem.*",
+                    "golemdungeons:.*(eye_of|samurai|sword|forge|core|upgrade).*",
 
                     "advanced_clover:.*_leaf_clover",
 
@@ -125,7 +126,7 @@ public class MagicCloverConfig {
                     "ashihara:(?!.*spawn_egg).*(cherry|maple|red|cypress|lantern|white|water|lamp|stick|tatami).*",
                     "ashihara:(?!.*spawn_egg).*(sakura|bamboo|powder|flour|bucket|dirt|soil|tamago|shatter|salt).*",
 
-                    "superpipeslide:.*_anchor",
+                    "superpipeslide:.*(_anchor|upgrade|projector)",
                     "minecartrevolution:*(_chest|anvil|_plate|campfire|cactus|beacon|portal|obsidian|amethyst|piston|_rail)",
                     "netmusic:music_cd",
                     "powertool:(marting_car|clap).*",
@@ -134,8 +135,16 @@ public class MagicCloverConfig {
 
                     "kaleidoscope:.*(lights|painting|board|grape|bucket|wine|brandy|champag|bottle|bride|dry_white).*",
 
-                    "wenyan_progr.*:.*_ink"
+                    "wenyan_progr.*:.*(_ink|paper)",
+                    "anvilcraft.*:.*(ingot|nugget|shell|blade|cluster|shard|fiber|_ore|component|charger|resin|sponge|topaz|ruby|sappire|exp_gem|amber|processor|board|cocoa|dough|flour|cream|raw_|_matter|_core|_bucket).*",
+                    "anvilcraft.*:.*(magnet|tank|_anvil|neoforge|grindstone|_table|_plate|generator|_block|heavy_iron|concrete|crystal|casing|hatch|tardis|sulfur|dry_ice|void|).*",
 
+                    "cartridge:(cartridge|surgery_table|backpack)",
+                    "colorful_crystals:.*(polish|raw|ore).*",
+                    "essentialism:analyzers_lens",
+                    "ether_craft:.*(cheese|blade|needle|pipe|block)",
+                    "orlu:.*",
+                    "touhou_little_.*:.*(garage_kit|_gohei|power_point|backpack|bookshelf|computer|beacon|basket|maid_bed|).*"
 
 
                 ),

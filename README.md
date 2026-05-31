@@ -19,7 +19,7 @@ advanced_clover:magic_clover[
     
     advanced_clover:entity_list={
         chance:300,
-        entity_list:"minecraft:ender_pearl"
+        entity_list:["minecraft:ender_pearl"]
     },
     advanced_clover:item_list={
         item_list:["minecraft:stone","minecraft:dirt","minecraft:diamond","minecraft:iron_ingot"]
