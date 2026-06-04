@@ -16,7 +16,9 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityProcessor;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
@@ -26,6 +28,7 @@ import net.minecraft.world.entity.vehicle.boat.Boat;
 import net.minecraft.world.entity.vehicle.minecart.Minecart;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.TagValueInput;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.ICancellableEvent;
@@ -35,6 +38,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.mojang.text2speech.Narrator.LOGGER;
 import static com.roseyasa.advanced_clover.Main.MODID;
 import static com.roseyasa.advanced_clover.registry.SoundRegister.SOUND_CLOVER_FAIL_ID;
 import static com.roseyasa.advanced_clover.utils.MagicCloverConfig.MOB_SPAWN_CHANCE;
@@ -65,17 +69,17 @@ public class MagicCloverEvent extends Event implements ICancellableEvent {
         if(level.isClientSide()) {
             return;
         }
-        // @debug, todo: 对物品和生物的component解析（或许不用解析，直接套上去）
+        // @debug, todo: 对物品的component解析（或许不用解析，直接套上去）
 
         // 如果设置了itemstack独立的chance且大于0，则不应用全局chance抽生物；只随机抽设置好的生物
         int mob_chance = cloverStack.get(ComponentRegister.ENTITY_TYPE).chance();
         List<String> mob_type_list = cloverStack.get(ComponentRegister.ENTITY_TYPE).entity_list();
         EntityType entityType;
-
+        CompoundTag compoundTag = null;
         if(mob_type_list != null ) {
             String selected_mob = mob_type_list.get(level.getRandom().nextInt(mob_type_list.size()));
-            Identifier identifier = Identifier.parse(selected_mob);
-            entityType = BuiltInRegistries.ENTITY_TYPE.getOptional(identifier).orElse(null);
+            entityType = parseEntityType(selected_mob);
+            compoundTag = parseNbtFromString(selected_mob);
         } else {
             entityType = getRandomEntity(level, cloverStack);
         }
@@ -90,7 +94,7 @@ public class MagicCloverEvent extends Event implements ICancellableEvent {
                 failOnExecute(player);
                 return;
             }
-            boolean success = createRandomEntity(level, player, entityType);
+            boolean success = createRandomEntity(level, player, entityType, compoundTag);
             if (!success) {
                 failOnExecute(player);
             }
@@ -98,7 +102,7 @@ public class MagicCloverEvent extends Event implements ICancellableEvent {
         }
 
         // 如果没抽到怪物，则做正常的生成物品
-        ItemStack itemStack = MagicCloverHandler.generateRandomItem(level, cloverStack);
+        ItemStack itemStack = generateRandomItem(level, cloverStack);
         if(itemStack == null){
             failOnExecute(player);
             return;
@@ -154,9 +158,9 @@ public class MagicCloverEvent extends Event implements ICancellableEvent {
         }
     }
 
-    private boolean createRandomEntity(Level level, Player player, EntityType entityType){
+    private boolean createRandomEntity(Level level, Player player, EntityType entityType, @Nullable CompoundTag nbt){
 
-        // 先判末影珍珠
+        // 先判末影珍珠，@debug：末影珍珠暂时不接受nbt
         if(entityType.equals(EntityType.ENDER_PEARL)) {
             level.playSound((Entity) null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENDER_PEARL_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
             ItemStack itemStack = new ItemStack(ENDER_PEARL);
@@ -170,6 +174,10 @@ public class MagicCloverEvent extends Event implements ICancellableEvent {
         }
         if(player == null){
             return false;
+        }
+        if (nbt != null) {
+            ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(LOGGER);
+            entity.load(TagValueInput.create(reporter, entity.registryAccess(), nbt));
         }
         Vec3 pos = player.position();
 
