@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "suspicious_stew",
+  "ingredients": [
+    "minecraft:bowl",
+    "minecraft:brown_mushroom",
+    "minecraft:red_mushroom",
+    "advanced_clover:three_leaf_clover"
+  ],
+  "result": {
+    "components": {
+      "minecraft:suspicious_stew_effects": [
+        {
+          "duration": 180,
+          "id": "minecraft:unluck"
+        }
+      ]
+    },
+    "id": "minecraft:suspicious_stew"
+  }
+}
