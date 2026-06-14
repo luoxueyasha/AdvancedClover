@@ -90,6 +90,7 @@ public class MagicCloverHandler {
 
         // 更新绑定于itemstack的custom_item_list
         // @debug,暂时不支持正则。获取数量会比较头疼
+        // @debug，需要支持component
         private static List<Item> updateCustomItemList(List<String> ilist) {
             List<Item> result = new ArrayList<>();
             for (Map.Entry<String, List<Item>> entry : ALL_ITEMS.entrySet()) {

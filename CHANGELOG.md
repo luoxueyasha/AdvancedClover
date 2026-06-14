@@ -2,9 +2,13 @@
 
 ## ver 1.0.1
 
-> 2026.5.17
+> 2026.6.7
 
+* Add Suspicious Stew for each clover bushes
+* Updates default whitelist for TeaCon 2026
+* Random mob supports a list and custom NBT
 * Update language files(zh_cn,zh_hk,zh_tw)
+
 
 ## ver 1.0.0
 

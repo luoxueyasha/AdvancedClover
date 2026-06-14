@@ -24,7 +24,6 @@ public class ItemRegister {
     // BlockItems with no BlockEntity
     public static final DeferredHolder<Item, BlockItem> ITEM_THREE_LEAF_CLOVER;
     public static final String ITEM_THREE_LEAF_CLOVER_ID = "three_leaf_clover";
-    // public static final DeferredHolder<CloverItem, BlockItem> ITEM_FOUR_LEAF_CLOVER;
     public static final DeferredHolder<Item, CloverItem> ITEM_FOUR_LEAF_CLOVER;
     public static final String ITEM_FOUR_LEAF_CLOVER_ID = "four_leaf_clover";
 
