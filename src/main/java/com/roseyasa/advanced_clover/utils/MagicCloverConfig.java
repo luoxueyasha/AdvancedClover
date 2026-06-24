@@ -147,7 +147,7 @@ public class MagicCloverConfig {
                     "neo_mystias_izakaya.*",
                     "beyond:loot_bag",
                     "obeliskdep.*:.*",
-                    "yuushya:(?!.*(item|encyclopedia|shimmering_pearl|lasting_wood|sprouting_|floating_|sparkling_|alert|).*)",
+                    "yuushya:(?!.*(item|encyclopedia|shimmering_pearl|lasting_wood|sprouting_|floating_|sparkling_|alert).*)",
                     "touhou_little_maid:.*(chair|garage_kit|backpack|power_point|gohei|chess|bed|bauble|bookshelf|keyboard)",
                     "craton:.*",
                     "furnitureplan:.*",
