@@ -99,7 +99,7 @@ public class MagicCloverConfig {
                     "shadowsandpetals:.*",
 
                     "programmable_magic:.*alloy_wand",
-                    "programmable_magic:.*plugin.*",
+                    "programmable_magic:.*plugin.*(supply|storage|release|color).*",
 
                     "letter_signal_phone:.*phone.*",
                     "letter_signal_phone:.*telegram.*",
