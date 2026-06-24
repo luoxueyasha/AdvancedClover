@@ -72,18 +72,17 @@ public class MagicCloverConfig {
 
                     ".*_(banner_pattern|pottery_sherd|smithing_template)",
 
-                    "bakeries:.*(powder|flour|toast|yolk|bread|dough|coffee|latte|raw_|egg|tomato|taro|olive|crosian|apple|roll|butter|).*",
+                    "bakeries:.*(powder|flour|toast|yolk|bread|dough).*",
 
-                    "bsf3lite:.*(snow|glove|skates|boots|core|vodka).*",
+                    "bsf3lite:.*(snow|glove).*",
 
                     "modulargolems:(?!.*spawn_egg).*golem.*",
-                    "golemdungeons:.*(eye_of|samurai|sword|forge|core|upgrade).*",
 
                     "advanced_clover:.*_leaf_clover",
 
                     "harvestheritage:.*_stand_block",
                     "harvestheritage:grass_shear",
-                    "harvestheritage:magnifying_glass",
+                    "harvestheritage:(magnifying_glass|zzzz)",
 
                     "mekanism:.*(dust_|nugget_|block_|raw_|ingot_|hazmat_|circuit).*",
                     "mekanism:.*(_scrap|_installer)",
@@ -95,13 +94,12 @@ public class MagicCloverConfig {
                     "super_lead:super_lead",
 
                     "eclipticseasons:pinwheel.*",
-                    "eclipticseasons:.*(chimes|wand)",
+                    "eclipticseasons:.*(chimes|wand|hygrometer)",
 
-                    "shadowsandpetals:.*(chair|sakura|maple|ginkgo|autumn|aluminum).*",
+                    "shadowsandpetals:.*",
 
                     "programmable_magic:.*alloy_wand",
                     "programmable_magic:.*plugin.*",
-                    "programmable_magic:spell_display.*",
 
                     "letter_signal_phone:.*phone.*",
                     "letter_signal_phone:.*telegram.*",
@@ -126,25 +124,60 @@ public class MagicCloverConfig {
                     "ashihara:(?!.*spawn_egg).*(cherry|maple|red|cypress|lantern|white|water|lamp|stick|tatami).*",
                     "ashihara:(?!.*spawn_egg).*(sakura|bamboo|powder|flour|bucket|dirt|soil|tamago|shatter|salt).*",
 
-                    "superpipeslide:.*(_anchor|upgrade|projector)",
+                    "superpipeslide:.*(_anchor|guide|projector)",
                     "minecartrevolution:*(_chest|anvil|_plate|campfire|cactus|beacon|portal|obsidian|amethyst|piston|_rail)",
-                    "netmusic:music_cd",
+                    "netmusic:music_cd|music_player|cd_burner|computer",
                     "powertool:(marting_car|clap).*",
                     "powertool:.*(boat|minecart|)",
 
 
                     "kaleidoscope:.*(lights|painting|board|grape|bucket|wine|brandy|champag|bottle|bride|dry_white).*",
 
-                    "wenyan_progr.*:.*(_ink|paper)",
-                    "anvilcraft.*:.*(ingot|nugget|shell|blade|cluster|shard|fiber|_ore|component|charger|resin|sponge|topaz|ruby|sappire|exp_gem|amber|processor|board|cocoa|dough|flour|cream|raw_|_matter|_core|_bucket).*",
-                    "anvilcraft.*:.*(magnet|tank|_anvil|neoforge|grindstone|_table|_plate|generator|_block|heavy_iron|concrete|crystal|casing|hatch|tardis|sulfur|dry_ice|void|).*",
+                    "wenyan_progr.*:.*_ink",
+                    "wenyan_addon:.*block",
 
-                    "cartridge:(cartridge|surgery_table|backpack)",
-                    "colorful_crystals:.*(polish|raw|ore).*",
-                    "essentialism:analyzers_lens",
-                    "ether_craft:.*(cheese|blade|needle|pipe|block)",
-                    "orlu:.*",
-                    "touhou_little_.*:.*(garage_kit|_gohei|power_point|backpack|bookshelf|computer|beacon|basket|maid_bed|).*"
+                    "living_unvanished:.*(skull|suspicious|bucket|eather)",
+                    "dungeon_infinity:.*(key_of|block).*",
+                    "sip_moment:.*",
+                    "caupona:.*(loaf|aspic|spice_jar|walnut|fig|tesse|snail|wolfberries|gravy|tuff|column|frying_pan|mud_|skimmer|scraps|asses|lead|leaves|silphium|charcoal|asafoe|litharge|brick).*",
+                    "convivium:.*(camellia|powder|glass|_juice|cage_wheel|basin).*",
+
+                    "a_better_foods:.*",
+                    "better_rod:.*(bait|hook|line)",
+                    "neo_mystias_izakaya.*",
+                    "beyond:loot_bag",
+                    "obeliskdep.*:.*",
+                    "yuushya:(?!.*(item|encyclopedia|shimmering_pearl|lasting_wood|sprouting_|floating_|sparkling_|alert|).*)",
+                    "touhou_little_maid:.*(chair|garage_kit|backpack|power_point|gohei|chess|bed|bauble|bookshelf|keyboard)",
+                    "craton:.*",
+                    "furnitureplan:.*",
+                    "dynamictrees:.*",
+                    "ether_craft:.*",
+                    "valorant:.*",
+                    "locusazzuro_icarus.*:.*(_feather|ingot|mixture|essence|gem|beeswax|_jar|flax|string|linen|helmet|wheat|_relic_|spear|disc_|_card_|melon).*",
+                    "locusazzuro_icarus.*:mead",
+                    "industrybase:.*",
+                    "gensokyooton.*:.*(maple|zelkova|sakura|redwood|ginkgo|wasabi|jade|mushroom).*",
+                    "kilagraph.*:.*",
+                    "maid_bakeries:.*list",
+                    "maid_storage:.*(calculator|card|guide).*",
+                    "ae2:.*",
+                    "channel:.*",
+                    "guide_me_to:.*",
+                    "lanfasie.*:.*(sword|praiser).*",
+                    "neoecoae:.*",
+                    "net_music_can_play_bili:.*",
+                    "ultramarine:.*",
+                    "minethespire:.*(lizard_|mango|pear|strawberry|burning_blood|of_the_snake|cracked_core|dark_shuriken|bouncing_flask|spirit|_orb|heavy_blade|pain_strike|chemical_x).*",
+                    "vw50:.*",
+                    "ourthoughtsareone:projection_core",
+                    "cc_ms:.*",
+                    "let_me_see.*:item_data_exporter",
+                    "netherlink:.*",
+                    "transmutatoria:.*(nigredo|venotite|eclipsium|lunargent|astrotite|abyssion|animercury|necroplumb|sanguibronze|ossantimony|fulgurzinc|martrix|essence).*",
+                    "girlfriends:.*",
+                    "woodenanvil:.*"
+
 
 
                 ),
