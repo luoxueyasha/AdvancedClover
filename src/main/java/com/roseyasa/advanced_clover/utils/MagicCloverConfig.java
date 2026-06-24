@@ -174,7 +174,7 @@ public class MagicCloverConfig {
                     "cc_ms:.*",
                     "let_me_see.*:item_data_exporter",
                     "netherlink:.*",
-                    "transmutatoria:.*(nigredo|venotite|eclipsium|lunargent|astrotite|abyssion|animercury|necroplumb|sanguibronze|ossantimony|fulgurzinc|martrix|essence).*",
+                    "transmutatoria:.*(nigredo|venotite|eclipsium|lunargent|astrotite|abyssion|animercury|necroplumb|sanguibronze|ossantimony|fulgurzinc|matrix|essence).*",
                     "girlfriends:.*",
                     "woodenanvil:.*"
 
