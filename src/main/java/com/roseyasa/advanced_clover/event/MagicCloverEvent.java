@@ -182,18 +182,24 @@ public class MagicCloverEvent extends Event implements ICancellableEvent {
         Vec3 pos = player.position();
 
         // 船/矿车放置在前方
+        Vec3 spawnPos;
        if(entity instanceof Boat || entity instanceof Minecart){
            float yaw = player.getYRot();
            float pitch = player.getXRot();
            Vec3 forward = Vec3.directionFromRotation(pitch, yaw).multiply(1.0, 0.0, 1.0).normalize();
            double offsetX = forward.x * 1.1;
            double offsetZ = forward.z * 1.1;
-           Vec3 spawnPos = new Vec3(pos.x + offsetX, pos.y, pos.z + offsetZ);
+           spawnPos = new Vec3(pos.x + offsetX, pos.y, pos.z + offsetZ);
            entity.setPos(spawnPos);
            entity.setYRot(yaw);
         } else {
-            entity.setPos(pos.x, pos.y + 0.2, pos.z);
+           spawnPos = new Vec3(pos.x, pos.y + 0.2, pos.z);
+           entity.setPos(spawnPos);
         }
+        entity.xo = spawnPos.x;
+        entity.yo = spawnPos.y;
+        entity.zo = spawnPos.z;
+
         level.addFreshEntity(entity);
         this.isSuccess = true;
         return true;
