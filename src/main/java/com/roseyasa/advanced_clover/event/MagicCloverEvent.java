@@ -1,6 +1,7 @@
 package com.roseyasa.advanced_clover.event;
 
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.roseyasa.advanced_clover.Main;
 import com.roseyasa.advanced_clover.registry.ComponentRegister;
 import com.roseyasa.advanced_clover.utils.MagicCloverHandler;
 import io.netty.buffer.ByteBuf;
@@ -38,7 +39,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.mojang.text2speech.Narrator.LOGGER;
 import static com.roseyasa.advanced_clover.Main.MODID;
 import static com.roseyasa.advanced_clover.registry.SoundRegister.SOUND_CLOVER_FAIL_ID;
 import static com.roseyasa.advanced_clover.utils.MagicCloverConfig.MOB_SPAWN_CHANCE;
@@ -176,7 +176,7 @@ public class MagicCloverEvent extends Event implements ICancellableEvent {
             return false;
         }
         if (nbt != null) {
-            ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(LOGGER);
+            ProblemReporter.ScopedCollector reporter = new ProblemReporter.ScopedCollector(Main.LOGGER);
             entity.load(TagValueInput.create(reporter, entity.registryAccess(), nbt));
         }
         Vec3 pos = player.position();
