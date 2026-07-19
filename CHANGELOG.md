@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## ver 1.0.2
+
+> 2026.7.18
+
+* Bugfix of random crashes in server
+
 ## ver 1.0.1
 
 > 2026.6.7
